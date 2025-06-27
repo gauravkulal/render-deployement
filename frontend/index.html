@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Mallige & Jaji Distribution</title>
+    <style>
+    :root {
+        --primary: #4f8cff;
+        --accent: #f7b731;
+        --bg: #f4f7fa;
+        --card: #fff;
+        --border: #e0e6ed;
+        --text: #222;
+        --muted: #888;
+        --shadow: 0 2px 12px rgba(79,140,255,0.07);
+    }
+    body {
+        font-family: 'Segoe UI', Arial, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        margin: 0;
+        padding: 0;
+    }
+    nav {
+        background: var(--card);
+        box-shadow: var(--shadow);
+        padding: 16px 32px;
+        display: flex;
+        gap: 16px;
+        align-items: center;
+        border-bottom: 1px solid var(--border);
+        margin-bottom: 32px;
+    }
+    nav button {
+        background: var(--primary);
+        color: #fff;
+        border: none;
+        border-radius: 20px;
+        padding: 8px 24px;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background 0.2s;
+    }
+    nav button:hover {
+        background: var(--accent);
+        color: #222;
+    }
+    h2 {
+        margin-top: 0;
+        letter-spacing: 1px;
+    }
+    .distribution-section {
+        display: flex;
+        gap: 32px;
+        margin-bottom: 32px;
+        flex-wrap: wrap;
+    }
+    .distribution-box {
+        background: var(--card);
+        border-radius: 18px;
+        box-shadow: var(--shadow);
+        padding: 24px 28px 18px 28px;
+        min-width: 220px;
+        border: 1px solid var(--border);
+    }
+    .distribution-box h3 {
+        margin-top: 0;
+        color: var(--primary);
+        font-size: 1.1rem;
+        margin-bottom: 12px;
+    }
+    .distribution-box label {
+        display: block;
+        margin: 10px 0 4px;
+        color: var(--muted);
+        font-size: 0.98rem;
+    }
+    .distribution-box input[type="text"], .distribution-box input[type="number"] {
+        width: 80px;
+        padding: 6px 10px;
+        border-radius: 8px;
+        border: 1px solid var(--border);
+        font-size: 1rem;
+        background: #f7faff;
+        margin-bottom: 6px;
+        transition: border 0.2s;
+    }
+    .distribution-box input[type="text"]:focus, .distribution-box input[type="number"]:focus {
+        border: 1.5px solid var(--primary);
+        outline: none;
+    }
+    .save-btn, .add-row-btn {
+        margin-top: 12px;
+        padding: 7px 18px;
+        background: var(--primary);
+        color: #fff;
+        border: none;
+        border-radius: 16px;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background 0.2s;
+        margin-right: 8px;
+    }
+    .save-btn:hover, .add-row-btn:hover {
+        background: var(--accent);
+        color: #222;
+    }
+    .totals-box {
+        margin-bottom: 20px;
+    }
+    .retailer-box {
+        margin-bottom: 24px;
+        background: var(--card);
+        border-radius: 14px;
+        box-shadow: var(--shadow);
+        padding: 16px 18px 10px 18px;
+        border: 1px solid var(--border);
+        transition: box-shadow 0.2s;
+    }
+    .retailer-box:hover {
+        box-shadow: 0 4px 24px rgba(79,140,255,0.13);
+    }
+    .retailer-name {
+        font-weight: 600;
+        margin-bottom: 8px;
+        color: var(--primary);
+        font-size: 1.08rem;
+        letter-spacing: 0.5px;
+    }
+    .expression-input {
+        display: block;
+        margin: 7px 0;
+        font-size: 1rem;
+    }
+    .expression-input input {
+        width: 120px;
+        padding: 6px 10px;
+        border-radius: 8px;
+        border: 1px solid var(--border);
+        font-size: 1rem;
+        background: #f7faff;
+        margin-right: 8px;
+        transition: border 0.2s;
+    }
+    .expression-input input:focus {
+        border: 1.5px solid var(--primary);
+        outline: none;
+    }
+    .expression-input span {
+        color: var(--accent);
+        font-weight: 500;
+        margin-left: 4px;
+    }
+    button {
+        padding: 7px 18px;
+        background: var(--primary);
+        color: #fff;
+        border: none;
+        border-radius: 16px;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background 0.2s;
+        margin: 10px 5px 0 0;
+    }
+    button:hover {
+        background: var(--accent);
+        color: #222;
+    }
+    #accounts-section, #half-commission-section {
+        background: var(--card);
+        border-radius: 18px;
+        box-shadow: var(--shadow);
+        padding: 28px 32px 24px 32px;
+        border: 1px solid var(--border);
+        max-width: 900px;
+        margin: 0 auto;
+        margin-bottom: 32px;
+    }
+    #accounts-section h2, #half-commission-section h2 {
+        color: var(--primary);
+        margin-bottom: 18px;
+    }
+    #accounts-section label, #half-commission-section label {
+        margin-right: 10px;
+        color: var(--muted);
+        font-size: 1rem;
+    }
+    #accounts-section input[type="number"], #accounts-section input[type="date"],
+    #half-commission-section input[type="number"], #half-commission-section input[type="date"] {
+        width: 110px;
+        padding: 6px 10px;
+        border-radius: 8px;
+        border: 1px solid var(--border);
+        font-size: 1rem;
+        background: #f7faff;
+        margin-right: 18px;
+        margin-bottom: 10px;
+        transition: border 0.2s;
+    }
+    #accounts-section input[type="number"]:focus, #accounts-section input[type="date"]:focus,
+    #half-commission-section input[type="number"]:focus, #half-commission-section input[type="date"]:focus {
+        border: 1.5px solid var(--primary);
+        outline: none;
+    }
+    #accounts-table, #half-accounts-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 18px;
+        background: #fafdff;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: var(--shadow);
+    }
+    #accounts-table th, #accounts-table td,
+    #half-accounts-table th, #half-accounts-table td {
+        padding: 10px 8px;
+        text-align: center;
+        border-bottom: 1px solid var(--border);
+        font-size: 1rem;
+    }
+    #accounts-table th, #half-accounts-table th {
+        background: #f2f6fb;
+        color: var(--primary);
+        font-weight: 600;
+        letter-spacing: 0.5px;
+    }
+    #accounts-table tr:last-child td, #half-accounts-table tr:last-child td {
+        border-bottom: none;
+    }
+    .add-row-btn {
+        margin-top: 18px;
+        margin-bottom: 0;
+        width: 160px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    /* --- Filter Bills Section Styling --- */
+    .filter-card {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 2px 12px rgba(79,140,255,0.09);
+      padding: 18px 16px 12px 16px;
+      margin-bottom: 18px;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .filter-fields {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: space-between;
+    }
+    .filter-fields label {
+      display: flex;
+      flex-direction: column;
+      font-size: 1rem;
+      color: #4f8cff;
+      flex: 1 1 120px;
+      min-width: 110px;
+    }
+    .filter-fields input, .filter-fields select {
+      margin-top: 4px;
+      padding: 8px 10px;
+      border-radius: 8px;
+      border: 1px solid #e0e6ed;
+      font-size: 1rem;
+      background: #f7faff;
+    }
+    .filter-actions {
+      display: flex;
+      gap: 12px;
+      margin-top: 12px;
+      justify-content: flex-end;
+    }
+    .filter-actions button {
+      padding: 8px 20px;
+      border-radius: 20px;
+      border: none;
+      background: #4f8cff;
+      color: #fff;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .filter-actions .clear-btn {
+      background: #eee;
+      color: #4f8cff;
+      border: 1px solid #4f8cff;
+    }
+    .filter-actions button:hover {
+      background: #f7b731;
+      color: #222;
+    }
+    #filter-results {
+      margin-top: 10px;
+    }
+    .filter-table-container {
+      overflow-x: auto;
+      margin-top: 10px;
+    }
+    .filter-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #fafdff;
+      border-radius: 12px;
+      overflow: hidden;
+      min-width: 600px;
+    }
+    .filter-table th, .filter-table td {
+      padding: 12px 8px;
+      text-align: center;
+      border-bottom: 1px solid #e0e6ed;
+      font-size: 1rem;
+    }
+    .filter-table th {
+      background: #eaf2ff;
+      color: #4f8cff;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+    .filter-table tr:last-child td {
+      border-bottom: none;
+    }
+    .filter-table tfoot td {
+      background: #f7b731;
+      color: #222;
+      font-weight: bold;
+    }
+    @media (max-width: 700px) {
+      .distribution-section {
+        flex-direction: column;
+        gap: 18px;
+        padding: 0 4px;
+      }
+      .distribution-box {
+        min-width: unset;
+        width: 100%;
+        margin-bottom: 10px;
+        padding: 18px 8px 14px 8px;
+      }
+      .retailer-box {
+        margin-bottom: 16px;
+        padding: 12px 8px 8px 8px;
+      }
+      .expression-input input {
+        width: 90px;
+        font-size: 1.1rem;
+        padding: 8px 10px;
+      }
+      .save-btn, button, .add-row-btn {
+        font-size: 1.1rem;
+        padding: 12px 0;
+        width: 100%;
+        margin: 10px 0 0 0;
+        border-radius: 24px;
+      }
+      #retailers {
+        margin-bottom: 60px;
+      }
+      .add-retailer-mobile {
+        position: fixed;
+        left: 0; right: 0; bottom: 0;
+        width: 100vw;
+        background: var(--primary);
+        color: #fff;
+        font-size: 1.2rem;
+        border: none;
+        border-radius: 0;
+        padding: 18px 0;
+        z-index: 100;
+        box-shadow: 0 -2px 12px rgba(79,140,255,0.09);
+      }
+      .filter-table {
+        min-width: 500px;
+        font-size: 0.95rem;
+      }
+      #accounts-section, #half-commission-section {
+        padding: 12px 2px 10px 2px;
+      }
+    }
+    @media (max-width: 900px) {
+        .distribution-section {
+            flex-direction: column;
+            gap: 18px;
+        }
+        #accounts-section, #half-commission-section {
+            padding: 16px 6px 12px 6px;
+        }
+    }
+
+    /* Modern Retailer Box Styles */
+
+.retailer-box {
+    margin-bottom: 20px;
+    background: linear-gradient(135deg, #fafdff 70%, #eaf2ff 100%);
+    border-radius: 18px;
+    box-shadow: 0 4px 24px rgba(79,140,255,0.13), 0 1.5px 8px rgba(79,140,255,0.07);
+    padding: 18px 18px 12px 18px;
+    border: 1.5px solid #e0e6ed;
+    transition: box-shadow 0.2s, border 0.2s;
+    position: relative;
+    overflow: hidden;
+}
+.retailer-box:hover, .retailer-box:focus-within {
+    box-shadow: 0 8px 32px rgba(79,140,255,0.18), 0 2px 12px rgba(79,140,255,0.09);
+    border: 1.5px solid #4f8cff;
+    background: linear-gradient(135deg, #fafdff 60%, #dbeafe 100%);
+}
+.retailer-name {
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: #4f8cff;
+    font-size: 1.15rem;
+    letter-spacing: 0.5px;
+    text-shadow: 0 1px 0 #fff;
+}
+.expression-input {
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+    font-size: 1rem;
+    gap: 8px;
+}
+.expression-input label {
+    color: #888;
+    font-size: 1rem;
+    margin-right: 4px;
+}
+.expression-input input {
+    width: 80px;
+    padding: 8px 12px;
+    border-radius: 10px;
+    border: 1.5px solid #e0e6ed;
+    font-size: 1.08rem;
+    background: #f7faff;
+    margin-right: 6px;
+    transition: border 0.2s, box-shadow 0.2s;
+    box-shadow: 0 1px 2px rgba(79,140,255,0.04);
+}
+.expression-input input:focus {
+    border: 1.5px solid #4f8cff;
+    outline: none;
+    background: #eaf2ff;
+}
+.expression-input span {
+    color: #f7b731;
+    font-weight: 600;
+    margin-left: 4px;
+    font-size: 1.08rem;
+    letter-spacing: 0.2px;
+}
+@media (max-width: 700px) {
+    .retailer-box {
+        margin-bottom: 14px;
+        padding: 14px 8px 10px 12px;
+        border-radius: 16px;
+        box-shadow: 0 2px 10px rgba(79,140,255,0.10);
+    }
+    .retailer-name {
+        font-size: 1.08rem;
+        margin-bottom: 7px;
+    }
+    .expression-input {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 2px;
+        font-size: 1.08rem;
+    }
+    .expression-input input {
+        width: 100%;
+        font-size: 1.13rem;
+        margin-bottom: 4px;
+        margin-right: 0;
+    }
+    .expression-input span {
+        font-size: 1.13rem;
+        margin-left: 0;
+    }
+}
+
+
+/* Modern sum pill for retailer box */
+.sum-pill {
+    display: inline-flex;
+    align-items: center;
+    background: #eaf2ff;
+    color: #2563eb;
+    border-radius: 16px;
+    padding: 2px 12px 2px 8px;
+    font-weight: 600;
+    font-size: 1.08rem;
+    margin-left: 6px;
+    box-shadow: 0 1px 2px rgba(79,140,255,0.07);
+    letter-spacing: 0.2px;
+    border: 1px solid #dbeafe;
+    min-width: 32px;
+}
+.sum-icon {
+    font-size: 1.05em;
+    margin-right: 5px;
+    opacity: 0.7;
+}
+
+
+    
+    </style>
+</head>
+<body>
+<nav>
+  <button onclick="window.location.href='home.html'">🏠 Home</button>
+  <button onclick="showSection('distribution')">Distribution</button>
+  <button onclick="showSection('accounts')">Accounts</button>
+  <button onclick="showSection('filter')">Filter Bills</button>
+  <button onclick="showSection('half-commission')">Half Commission Accounts</button>
+  <button onclick="showSection('filter-half-commission')">Filter Half Commission</button>
+  <button onclick="showSection('rate-acc')">Rate Acc</button>
+</nav>
+<!-- Distribution Section -->
+<div id="distribution-section">
+    <h2>Mallige & Jaji Distribution</h2>
+    <div class="distribution-section">
+        <div class="distribution-box">
+            <h3>1st Distribution</h3>
+            <label for="firstM">M</label>
+            <input type="text" id="firstM" readonly>
+            <label for="firstJ">J</label>
+            <input type="text" id="firstJ" readonly>
+            <button class="save-btn" onclick="saveFirstDistribution()">SAVE</button>
+            <button class="save-btn" onclick="unsaveFirstDistribution()">UNSAVE</button>
+        </div>
+        <div class="distribution-box">
+            <h3>2nd Distribution</h3>
+            <label for="secondM">M</label>
+            <input type="text" id="secondM" readonly>
+            <label for="secondJ">J</label>
+            <input type="text" id="secondJ" readonly>
+        </div>
+        <div class="distribution-box">
+            <h3>Totals</h3>
+            <div>Total M: <span id="totalM">0</span></div>
+            <div>Total J: <span id="totalJ">0</span></div>
+            <label>Approximate M</label>
+            <input type="text" id="approxM" oninput="setInitialApprox('M')">
+            <label>Approximate J</label>
+            <input type="text" id="approxJ" oninput="setInitialApprox('J')">
+        </div>
+    </div>
+    <div id="retailers"></div>
+    <button class="add-retailer-mobile" onclick="addRetailer()">Add Retailer +</button>
+<button class="add-retailer-mobile" style="background:#e74c3c;margin-top:10px;" onclick="resetDistribution()">Reset Distribution</button>
+</div>
+
+<!-- Accounts Section -->
+<div id="accounts-section" style="display:none;">
+  <h2>Accounts</h2>
+  <div>
+    <label for="accountsDate">Date</label>
+    <input type="date" id="accountsDate" required>
+    <label for="rateM">M Rate</label>
+    <input type="number" step="any" id="rateM" value="0" onchange="updateAccountsTable()">
+    <label for="rateJ">J Rate</label>
+    <input type="number" step="any" id="rateJ" value="0" onchange="updateAccountsTable()">
+    <button class="save-btn" onclick="saveAccounts()">Save</button>
+  </div>
+  <table border="1" id="accounts-table">
+    <thead>
+      <tr>
+        <th>Retailor</th>
+        <th>M</th>
+        <th>J</th>
+        <th>M.Rate</th>
+        <th>J.Rate</th>
+        <th>M.Total</th>
+        <th>J.Total</th>
+        <th>Total</th>
+      </tr>
+    </thead>
+    <tbody id="accounts-tbody">
+      <!-- Rows will be filled by JS -->
+    </tbody>
+  </table>
+</div>
+
+<!-- Filter Bills Section -->
+<div id="filter-section" style="display:none;">
+  <h2>Filter Bills</h2>
+  <div class="filter-card">
+    <div class="filter-fields">
+      <label>
+        <span>From</span>
+        <input type="date" id="filterFrom">
+      </label>
+      <label>
+        <span>Till</span>
+        <input type="date" id="filterTill">
+      </label>
+      <label>
+        <span>Retailer</span>
+        <select id="filterRetailer">
+          <option value="">All</option>
+          <option value="AR">AR</option>
+          <option value="MM">MM</option>
+          <option value="jana">jana</option>
+          <option value="ashok">ashok</option>
+          <option value="SKI">SKI</option>
+          <option value="Ranga">Ranga</option>
+          <option value="iqbal">iqbal</option>
+          <option value="PVS">PVS</option>
+          <option value="Monthu">Monthu</option>
+          <option value="Inchu">Inchu</option>
+          <option value="Manju">Manju</option>
+          <option value="Abuta">Abuta</option>
+          <option value="Hussaian">Hussaian</option>
+        </select>
+      </label>
+    </div>
+    <div class="filter-actions">
+      <button onclick="filterBills()">Filter</button>
+      <button class="clear-btn" onclick="clearFilter()">Clear</button>
+    </div>
+  </div>
+  <div id="filter-results"></div>
+<button id="shareBillsButton" style="display:none;margin-top:12px;" onclick="shareBills()">Share Bills</button>
+</div>
+
+<!-- Half Commission Accounts Section -->
+<div id="half-commission-section" style="display:none;">
+  <h2>Half Commission Accounts</h2>
+  <div>
+    <label for="halfAccountsDate">Date</label>
+    <input type="date" id="halfAccountsDate" required>
+    <label for="halfRateM">M Rate</label>
+    <input type="number" step="any" id="halfRateM" value="0" onchange="updateHalfAccountsTable()">
+    <label for="halfRateJ">J Rate</label>
+    <input type="number" step="any" id="halfRateJ" value="0" onchange="updateHalfAccountsTable()">
+    <button class="save-btn" onclick="saveHalfAccounts()">Save</button>
+  </div>
+  <table border="1" id="half-accounts-table" class="table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>M</th>
+        <th>J</th>
+        <th>M.Rate</th>
+        <th>J.Rate</th>
+        <th>M.Total</th>
+        <th>J.Total</th>
+        <th>Total</th>
+      </tr>
+    </thead>
+    <tbody id="half-accounts-tbody">
+      <!-- Rows will be filled by JS -->
+    </tbody>
+  </table>
+  <button class="add-row-btn" onclick="addHalfCommissionRow()">Add Row</button>
+</div>
+
+
+
+<!-- Filter Half Commission Section -->
+<div id="filter-half-commission-section" style="display:none;">
+  <h2>Filter Half Commission</h2>
+  <div class="filter-card">
+    <div class="filter-fields">
+      <label>
+        <span>From</span>
+        <input type="date" id="filterHalfFrom">
+      </label>
+      <label>
+        <span>Till</span>
+        <input type="date" id="filterHalfTill">
+      </label>
+      <label>
+        <span>Name</span>
+        <select id="filterHalfRetailer">
+          <option value="">All</option>
+          <!-- Options will be filled by JS -->
+        </select>
+      </label>
+    </div>
+    <div class="filter-actions">
+      <button onclick="filterHalfCommission()">Filter</button>
+      <button class="clear-btn" onclick="clearFilterHalfCommission()">Clear</button>
+    </div>
+  </div>
+  <div id="filter-half-results"></div>
+</div>
+
+
+<!-- Rate Acc Section -->
+<div id="rate-acc-section" style="display:none;">
+  <h2>Rate Acc</h2>
+  <div>
+    <label for="rateAccDate">Date</label>
+    <input type="date" id="rateAccDate" required>
+    <label for="rateAccM">M Rate</label>
+    <input type="number" step="any" id="rateAccM" value="0" onchange="updateRateAccTable()">
+    <label for="rateAccJ">J Rate</label>
+    <input type="number" step="any" id="rateAccJ" value="0" onchange="updateRateAccTable()">
+    <button class="save-btn" onclick="saveRateAcc()">Save</button>
+  </div>
+  <table border="1" id="rate-acc-table" class="table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Given M</th>
+        <th>Taken M</th>
+        <th>Given J</th>
+        <th>Taken J</th>
+        <th>M Rate</th>
+        <th>J Rate</th>
+        <th>Given M Total</th>
+        <th>Taken M Total</th>
+        <th>Given J Total</th>
+        <th>Taken J Total</th>
+      </tr>
+    </thead>
+    <tbody id="rate-acc-tbody">
+      <!-- Rows will be filled by JS -->
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="7" style="text-align:right;">Grand Total M:</td>
+        <td id="grandGivenMTotal"></td>
+        <td id="grandTakenMTotal"></td>
+        <td id="grandGivenJTotal"></td>
+        <td id="grandTakenJTotal"></td>
+      </tr>
+      <tr>
+        <td colspan="7" style="text-align:right;">Grand Total M (Net):</td>
+        <td colspan="2" id="grandMNet"></td>
+        <td colspan="2" id="grandJNet"></td>
+      </tr>
+      <tr>
+        <td colspan="7" style="text-align:right;">Overall Bill Total:</td>
+        <td colspan="4" id="overallBillTotal"></td>
+      </tr>
+    </tfoot>
+  </table>
+
+  <!-- Rate Acc Filter Section (inserted here) -->
+  <div id="rate-acc-filter-section" style="margin-top:32px;">
+    <h3>Filter Rate Acc</h3>
+    <div class="filter-card">
+      <div class="filter-fields">
+        <label>
+          <span>From</span>
+          <input type="date" id="filterRateAccFrom">
+        </label>
+        <label>
+          <span>Till</span>
+          <input type="date" id="filterRateAccTill">
+        </label>
+        <label>
+          <span>Name</span>
+          <select id="filterRateAccName">
+            <option value="">All</option>
+            <option value="Monthu">Monthu</option>
+            <option value="Inchu">Inchu</option>
+            <option value="Manju">Manju</option>
+            <option value="Abuta">Abuta</option>
+            <option value="Hussaian">Hussaian</option>
+          </select>
+        </label>
+      </div>
+      <div class="filter-actions">
+        <button onclick="filterRateAcc()">Filter</button>
+        <button class="clear-btn" onclick="clearFilterRateAcc()">Clear</button>
+      </div>
+    </div>
+    <div id="rate-acc-filter-results"></div>
+  </div>
+</div>
+
+
+
+<script src="scripts/main.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+
+
+</body>
+</html>

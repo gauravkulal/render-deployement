@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Mallige & Jaji Distribution - Home</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      background: #f4f7fa;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .header {
+      background: #4f8cff;
+      color: #fff;
+      padding: 32px 0 18px 0;
+      text-align: center;
+      box-shadow: 0 2px 12px rgba(79,140,255,0.07);
+    }
+    .header h1 {
+      margin: 0;
+      font-size: 2.2rem;
+      letter-spacing: 1px;
+    }
+    .header p {
+      margin: 8px 0 0 0;
+      font-size: 1.1rem;
+      color: #eaf2ff;
+    }
+    .nav-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 22px;
+      padding: 32px 18px 18px 18px;
+      max-width: 600px;
+      margin: 0 auto;
+      width: 100%;
+    }
+    .nav-card {
+      background: #fff;
+      border-radius: 18px;
+      box-shadow: 0 2px 12px rgba(79,140,255,0.09);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 28px 10px 18px 10px;
+      cursor: pointer;
+      transition: box-shadow 0.18s, transform 0.18s;
+      border: 1.5px solid #e0e6ed;
+      min-height: 120px;
+      position: relative;
+    }
+    .nav-card:hover, .nav-card:active {
+      box-shadow: 0 6px 24px rgba(79,140,255,0.18);
+      transform: translateY(-4px) scale(1.03);
+      border-color: #4f8cff;
+    }
+    .nav-icon {
+      font-size: 2.3rem;
+      margin-bottom: 12px;
+      color: #4f8cff;
+      transition: color 0.2s;
+    }
+    .nav-card:hover .nav-icon {
+      color: #f7b731;
+    }
+    .nav-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #222;
+      letter-spacing: 0.5px;
+      text-align: center;
+    }
+    @media (max-width: 600px) {
+      .nav-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+        padding: 18px 4px 8px 4px;
+      }
+      .nav-card {
+        min-height: 90px;
+        padding: 18px 4px 10px 4px;
+      }
+      .header h1 {
+        font-size: 1.4rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>Mallige & Jaji Distribution</h1>
+    <p>Welcome! Choose a section to get started.</p>
+  </div>
+  <div class="nav-grid">
+    <div class="nav-card" onclick="goTo('distribution')">
+      <span class="nav-icon">🌸</span>
+      <div class="nav-title">Distribution</div>
+    </div>
+    <div class="nav-card" onclick="goTo('accounts')">
+      <span class="nav-icon">📒</span>
+      <div class="nav-title">Accounts</div>
+    </div>
+    <div class="nav-card" onclick="goTo('filter')">
+      <span class="nav-icon">🔎</span>
+      <div class="nav-title">Filter Bills</div>
+    </div>
+    <div class="nav-card" onclick="goTo('half-commission')">
+      <span class="nav-icon">🧾</span>
+      <div class="nav-title">Half Commission Accounts</div>
+    </div>
+    <div class="nav-card" onclick="goTo('filter-half-commission')">
+      <span class="nav-icon">🗂️</span>
+      <div class="nav-title">Filter Half Commission</div>
+    </div>
+  </div>
+  <script>
+    function goTo(section) {
+      window.location.href = "index.html#" + section;
+    }
+    // Optional: If you want index.html to auto-open the right section based on hash
+    // Add this to your index.html's JS:
+    // window.onload = function() {
+    //   if (window.location.hash) {
+    //     showSection(window.location.hash.substring(1));
+    //   }
+    // }
+  </script>
+</body>
+</html>
