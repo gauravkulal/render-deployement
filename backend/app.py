@@ -13,7 +13,9 @@ app = Flask(
     static_url_path='/scripts'
 )
 CORS(app)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get(
+    'DATABASE_URL', 'sqlite:///database.db'
+)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 from models import db
