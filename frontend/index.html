@@ -51,6 +51,7 @@
         max-width: 1400px;
         margin: 0 auto;
         padding: 0 1.5rem;
+        position: relative;
     }
     
     .app-title {
@@ -60,6 +61,27 @@
         text-align: center;
         margin-bottom: 1rem;
         text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    
+    /* Hamburger Menu Button */
+    .hamburger {
+        display: none;
+        background: rgba(255,255,255,0.2);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255,255,255,0.3);
+        color: white;
+        font-size: 1.5rem;
+        padding: 0.5rem 0.75rem;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        position: absolute;
+        top: 0;
+        right: 1.5rem;
+    }
+    
+    .hamburger:hover {
+        background: rgba(255,255,255,0.3);
     }
     
     .nav-buttons {
@@ -747,17 +769,49 @@
             grid-template-columns: 1fr;
         }
         
-        .app-title {
-            font-size: 1.5rem;
+        /* Compact header for mobile */
+        .app-header {
+            padding: 0.75rem 0;
         }
         
+        .header-content {
+            padding: 0 1rem;
+        }
+        
+        .app-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            padding-right: 3rem;
+        }
+        
+        /* Show hamburger menu on mobile */
+        .hamburger {
+            display: block;
+            font-size: 1.3rem;
+            padding: 0.4rem 0.6rem;
+            top: 0.5rem;
+            right: 1rem;
+        }
+        
+        /* Hide nav buttons by default on mobile */
         .nav-buttons {
-            gap: 0.5rem;
+            display: none;
+            flex-direction: column;
+            width: 100%;
+            gap: 0.4rem;
+            margin-top: 0.5rem;
+        }
+        
+        /* Show nav buttons when menu is open */
+        .nav-buttons.active {
+            display: flex;
         }
         
         .nav-btn {
-            padding: 0.5rem 1rem;
+            padding: 0.6rem 0.8rem;
             font-size: 0.85rem;
+            width: 100%;
+            text-align: center;
         }
         
         .btn-group {
@@ -827,7 +881,8 @@
     <header class="app-header">
         <div class="header-content">
             <h1 class="app-title">🌸 Mallige & Jaji Distribution</h1>
-            <nav class="nav-buttons">
+            <button class="hamburger" onclick="toggleMenu()" aria-label="Toggle menu">☰</button>
+            <nav class="nav-buttons" id="navMenu">
                 <button class="nav-btn" onclick="window.location.href='home.html'">🏠 Home</button>
                 <button class="nav-btn" onclick="showSection('distribution')">📊 Distribution</button>
                 <button class="nav-btn" onclick="showSection('accounts')">💰 Accounts</button>
@@ -1455,6 +1510,17 @@
                 document.getElementById('rate-acc-section').style.display = 'block';
                 updateRateAccTable();
             }
+            
+            // Close mobile menu after selecting a section
+            const navMenu = document.getElementById('navMenu');
+            if (navMenu && window.innerWidth <= 768) {
+                navMenu.classList.remove('active');
+            }
+        }
+
+        function toggleMenu() {
+            const navMenu = document.getElementById('navMenu');
+            navMenu.classList.toggle('active');
         }
 
         function updateAccountsTable() {
