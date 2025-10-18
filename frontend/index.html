@@ -2,783 +2,2035 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mallige & Jaji Distribution</title>
     <style>
     :root {
-        --primary: #4f8cff;
-        --accent: #f7b731;
-        --bg: #f4f7fa;
-        --card: #fff;
-        --border: #e0e6ed;
-        --text: #222;
-        --muted: #888;
-        --shadow: 0 2px 12px rgba(79,140,255,0.07);
+        --primary: #2563eb;
+        --primary-dark: #1e40af;
+        --accent: #f59e0b;
+        --accent-dark: #d97706;
+        --success: #10b981;
+        --danger: #ef4444;
+        --bg-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        --bg-light: #f8fafc;
+        --card-bg: #ffffff;
+        --text-primary: #1e293b;
+        --text-secondary: #64748b;
+        --border: #e2e8f0;
+        --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
+        --shadow-md: 0 4px 6px rgba(0,0,0,0.07);
+        --shadow-lg: 0 10px 25px rgba(0,0,0,0.1);
+        --shadow-xl: 0 20px 40px rgba(0,0,0,0.15);
     }
-    body {
-        font-family: 'Segoe UI', Arial, sans-serif;
-        background: var(--bg);
-        color: var(--text);
+    
+    * {
         margin: 0;
         padding: 0;
+        box-sizing: border-box;
     }
-    nav {
-        background: var(--card);
-        box-shadow: var(--shadow);
-        padding: 16px 32px;
+    
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+        background: var(--bg-light);
+        color: var(--text-primary);
+        line-height: 1.6;
+    }
+    
+    /* Header */
+    .app-header {
+        background: var(--bg-gradient);
+        padding: 1.5rem 0;
+        box-shadow: var(--shadow-lg);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+    }
+    
+    .header-content {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 1.5rem;
+    }
+    
+    .app-title {
+        color: white;
+        font-size: 1.75rem;
+        font-weight: 700;
+        text-align: center;
+        margin-bottom: 1rem;
+        text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    
+    .nav-buttons {
         display: flex;
-        gap: 16px;
-        align-items: center;
-        border-bottom: 1px solid var(--border);
-        margin-bottom: 32px;
-    }
-    nav button {
-        background: var(--primary);
-        color: #fff;
-        border: none;
-        border-radius: 20px;
-        padding: 8px 24px;
-        font-size: 1rem;
-        cursor: pointer;
-        transition: background 0.2s;
-    }
-    nav button:hover {
-        background: var(--accent);
-        color: #222;
-    }
-    h2 {
-        margin-top: 0;
-        letter-spacing: 1px;
-    }
-    .distribution-section {
-        display: flex;
-        gap: 32px;
-        margin-bottom: 32px;
+        gap: 0.75rem;
         flex-wrap: wrap;
+        justify-content: center;
     }
-    .distribution-box {
-        background: var(--card);
-        border-radius: 18px;
-        box-shadow: var(--shadow);
-        padding: 24px 28px 18px 28px;
-        min-width: 220px;
-        border: 1px solid var(--border);
-    }
-    .distribution-box h3 {
-        margin-top: 0;
-        color: var(--primary);
-        font-size: 1.1rem;
-        margin-bottom: 12px;
-    }
-    .distribution-box label {
-        display: block;
-        margin: 10px 0 4px;
-        color: var(--muted);
-        font-size: 0.98rem;
-    }
-    .distribution-box input[type="text"], .distribution-box input[type="number"] {
-        width: 80px;
-        padding: 6px 10px;
-        border-radius: 8px;
-        border: 1px solid var(--border);
-        font-size: 1rem;
-        background: #f7faff;
-        margin-bottom: 6px;
-        transition: border 0.2s;
-    }
-    .distribution-box input[type="text"]:focus, .distribution-box input[type="number"]:focus {
-        border: 1.5px solid var(--primary);
-        outline: none;
-    }
-    .save-btn, .add-row-btn {
-        margin-top: 12px;
-        padding: 7px 18px;
-        background: var(--primary);
-        color: #fff;
-        border: none;
-        border-radius: 16px;
-        font-size: 1rem;
-        cursor: pointer;
-        transition: background 0.2s;
-        margin-right: 8px;
-    }
-    .save-btn:hover, .add-row-btn:hover {
-        background: var(--accent);
-        color: #222;
-    }
-    .totals-box {
-        margin-bottom: 20px;
-    }
-    .retailer-box {
-        margin-bottom: 24px;
-        background: var(--card);
-        border-radius: 14px;
-        box-shadow: var(--shadow);
-        padding: 16px 18px 10px 18px;
-        border: 1px solid var(--border);
-        transition: box-shadow 0.2s;
-    }
-    .retailer-box:hover {
-        box-shadow: 0 4px 24px rgba(79,140,255,0.13);
-    }
-    .retailer-name {
+    
+    .nav-btn {
+        background: rgba(255,255,255,0.2);
+        backdrop-filter: blur(10px);
+        color: white;
+        border: 1px solid rgba(255,255,255,0.3);
+        padding: 0.625rem 1.25rem;
+        border-radius: 50px;
+        font-size: 0.9rem;
         font-weight: 600;
-        margin-bottom: 8px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        white-space: nowrap;
+    }
+    
+    .nav-btn:hover {
+        background: rgba(255,255,255,0.3);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+    
+    .nav-btn:active {
+        transform: translateY(0);
+    }
+    
+    /* Container */
+    .container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 2rem 1.5rem;
+    }
+    
+    /* Dashboard Cards - Distribution Section */
+    .dashboard-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1.5rem;
+        margin-bottom: 2.5rem;
+    }
+    
+    .dashboard-card {
+        background: var(--card-bg);
+        border-radius: 20px;
+        padding: 1.75rem;
+        box-shadow: var(--shadow-md);
+        border: 1px solid var(--border);
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .dashboard-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: var(--bg-gradient);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+    
+    .dashboard-card:hover {
+        transform: translateY(-4px);
+        box-shadow: var(--shadow-xl);
+    }
+    
+    .dashboard-card:hover::before {
+        opacity: 1;
+    }
+    
+    .card-header {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        margin-bottom: 1.25rem;
+    }
+    
+    .card-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        background: var(--bg-gradient);
+        color: white;
+        box-shadow: var(--shadow-sm);
+    }
+    
+    .card-title {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: var(--text-primary);
+    }
+    
+    .card-body {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .stat-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.75rem;
+        background: var(--bg-light);
+        border-radius: 12px;
+    }
+    
+    .stat-label {
+        font-size: 0.9rem;
+        color: var(--text-secondary);
+        font-weight: 500;
+    }
+    
+    .stat-value {
+        font-size: 1.5rem;
+        font-weight: 700;
         color: var(--primary);
-        font-size: 1.08rem;
+    }
+    
+    .input-group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .input-label {
+        font-size: 0.875rem;
+        font-weight: 600;
+        color: var(--text-secondary);
+        text-transform: uppercase;
         letter-spacing: 0.5px;
     }
-    .expression-input {
-        display: block;
-        margin: 7px 0;
+    
+    .input-field {
+        padding: 0.75rem 1rem;
+        border: 2px solid var(--border);
+        border-radius: 12px;
         font-size: 1rem;
+        transition: all 0.3s ease;
+        background: white;
     }
-    .expression-input input {
-        width: 120px;
-        padding: 6px 10px;
-        border-radius: 8px;
-        border: 1px solid var(--border);
-        font-size: 1rem;
-        background: #f7faff;
-        margin-right: 8px;
-        transition: border 0.2s;
-    }
-    .expression-input input:focus {
-        border: 1.5px solid var(--primary);
+    
+    .input-field:focus {
         outline: none;
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px rgba(37,99,235,0.1);
     }
-    .expression-input span {
-        color: var(--accent);
-        font-weight: 500;
-        margin-left: 4px;
+    
+    .input-field:read-only {
+        background: var(--bg-light);
+        cursor: not-allowed;
     }
-    button {
-        padding: 7px 18px;
-        background: var(--primary);
-        color: #fff;
+    
+    .btn-group {
+        display: flex;
+        gap: 0.75rem;
+        flex-wrap: wrap;
+    }
+    
+    .btn {
+        padding: 0.75rem 1.5rem;
         border: none;
-        border-radius: 16px;
-        font-size: 1rem;
+        border-radius: 12px;
+        font-size: 0.95rem;
+        font-weight: 600;
         cursor: pointer;
-        transition: background 0.2s;
-        margin: 10px 5px 0 0;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        justify-content: center;
+        flex: 1;
+        min-width: 120px;
     }
-    button:hover {
+    
+    .btn-primary {
+        background: var(--primary);
+        color: white;
+    }
+    
+    .btn-primary:hover {
+        background: var(--primary-dark);
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-md);
+    }
+    
+    .btn-secondary {
+        background: var(--text-secondary);
+        color: white;
+    }
+    
+    .btn-secondary:hover {
+        background: #475569;
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-md);
+    }
+    
+    .btn-success {
+        background: var(--success);
+        color: white;
+    }
+    
+    .btn-success:hover {
+        background: #059669;
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-md);
+    }
+    
+    .btn-danger {
+        background: var(--danger);
+        color: white;
+    }
+    
+    .btn-danger:hover {
+        background: #dc2626;
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-md);
+    }
+    
+    /* Retailers Section */
+    .section-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.5rem;
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+    
+    .section-title {
+        font-size: 1.75rem;
+        font-weight: 700;
+        color: var(--text-primary);
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+    }
+    
+    .section-title::before {
+        content: '';
+        width: 4px;
+        height: 32px;
+        background: var(--bg-gradient);
+        border-radius: 4px;
+    }
+    
+    .retailers-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+        gap: 1.25rem;
+        margin-bottom: 2rem;
+    }
+    
+    .retailer-card {
+        background: var(--card-bg);
+        border-radius: 16px;
+        padding: 1.5rem;
+        box-shadow: var(--shadow-sm);
+        border: 2px solid var(--border);
+        transition: all 0.3s ease;
+        position: relative;
+    }
+    
+    .retailer-card:hover {
+        border-color: var(--primary);
+        box-shadow: var(--shadow-lg);
+        transform: translateY(-2px);
+    }
+    
+    .retailer-header {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        margin-bottom: 1.25rem;
+        padding-bottom: 1rem;
+        border-bottom: 2px solid var(--border);
+    }
+    
+    .retailer-avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 10px;
+        background: var(--bg-gradient);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: 700;
+        font-size: 1.1rem;
+    }
+    
+    .retailer-name {
+        font-size: 1.15rem;
+        font-weight: 700;
+        color: var(--text-primary);
+    }
+    
+    .retailer-inputs {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .input-row {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+    }
+    
+    .input-label-inline {
+        font-weight: 700;
+        font-size: 1rem;
+        color: var(--primary);
+        min-width: 20px;
+    }
+    
+    .input-wrapper {
+        flex: 1;
+        position: relative;
+    }
+    
+    .input-field-inline {
+        width: 100%;
+        padding: 0.75rem 1rem;
+        padding-right: 4rem;
+        border: 2px solid var(--border);
+        border-radius: 12px;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+        background: white;
+    }
+    
+    .input-field-inline:focus {
+        outline: none;
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px rgba(37,99,235,0.1);
+    }
+    
+    .sum-badge {
+        position: absolute;
+        right: 1rem;
+        top: 50%;
+        transform: translateY(-50%);
         background: var(--accent);
-        color: #222;
+        color: white;
+        padding: 0.25rem 0.75rem;
+        border-radius: 20px;
+        font-size: 0.875rem;
+        font-weight: 700;
+        pointer-events: none;
     }
-    #accounts-section, #half-commission-section {
-        background: var(--card);
+    
+    /* Floating Action Button */
+    .fab-container {
+        position: fixed;
+        bottom: 2rem;
+        right: 2rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        z-index: 50;
+    }
+    
+    .fab {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background: var(--bg-gradient);
+        color: white;
+        border: none;
+        font-size: 1.5rem;
+        cursor: pointer;
+        box-shadow: var(--shadow-lg);
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .fab:hover {
+        transform: scale(1.1) rotate(90deg);
+        box-shadow: var(--shadow-xl);
+    }
+    
+    .fab-danger {
+        background: var(--danger);
+    }
+    
+    .fab-danger:hover {
+        transform: scale(1.1) rotate(0deg);
+    }
+
+    /* Other Sections Styling */
+    #accounts-section, #half-commission-section, #rate-acc-section {
+        background: var(--card-bg);
         border-radius: 18px;
-        box-shadow: var(--shadow);
+        box-shadow: var(--shadow-md);
         padding: 28px 32px 24px 32px;
         border: 1px solid var(--border);
-        max-width: 900px;
+        max-width: 1200px;
         margin: 0 auto;
         margin-bottom: 32px;
     }
-    #accounts-section h2, #half-commission-section h2 {
+
+    #accounts-section h2, #half-commission-section h2, #rate-acc-section h2 {
         color: var(--primary);
         margin-bottom: 18px;
+        font-size: 1.75rem;
     }
-    #accounts-section label, #half-commission-section label {
+
+    #accounts-section label, #half-commission-section label, #rate-acc-section label {
         margin-right: 10px;
-        color: var(--muted);
+        color: var(--text-secondary);
         font-size: 1rem;
+        font-weight: 600;
     }
+
     #accounts-section input[type="number"], #accounts-section input[type="date"],
-    #half-commission-section input[type="number"], #half-commission-section input[type="date"] {
+    #half-commission-section input[type="number"], #half-commission-section input[type="date"],
+    #rate-acc-section input[type="number"], #rate-acc-section input[type="date"] {
         width: 110px;
-        padding: 6px 10px;
+        padding: 8px 12px;
         border-radius: 8px;
-        border: 1px solid var(--border);
+        border: 2px solid var(--border);
         font-size: 1rem;
-        background: #f7faff;
+        background: white;
         margin-right: 18px;
         margin-bottom: 10px;
         transition: border 0.2s;
     }
-    #accounts-section input[type="number"]:focus, #accounts-section input[type="date"]:focus,
-    #half-commission-section input[type="number"]:focus, #half-commission-section input[type="date"]:focus {
-        border: 1.5px solid var(--primary);
+
+    #accounts-section input:focus, #half-commission-section input:focus, #rate-acc-section input:focus {
+        border-color: var(--primary);
         outline: none;
+        box-shadow: 0 0 0 3px rgba(37,99,235,0.1);
     }
-    #accounts-table, #half-accounts-table {
+
+    #accounts-table, #half-accounts-table, #rate-acc-table {
         width: 100%;
         border-collapse: collapse;
         margin-top: 18px;
         background: #fafdff;
         border-radius: 12px;
         overflow: hidden;
-        box-shadow: var(--shadow);
+        box-shadow: var(--shadow-sm);
     }
+
     #accounts-table th, #accounts-table td,
-    #half-accounts-table th, #half-accounts-table td {
-        padding: 10px 8px;
+    #half-accounts-table th, #half-accounts-table td,
+    #rate-acc-table th, #rate-acc-table td {
+        padding: 12px 8px;
         text-align: center;
         border-bottom: 1px solid var(--border);
         font-size: 1rem;
     }
-    #accounts-table th, #half-accounts-table th {
-        background: #f2f6fb;
+
+    #accounts-table th, #half-accounts-table th, #rate-acc-table th {
+        background: #eaf2ff;
         color: var(--primary);
         font-weight: 600;
         letter-spacing: 0.5px;
     }
-    #accounts-table tr:last-child td, #half-accounts-table tr:last-child td {
+
+    #accounts-table tr:last-child td, #half-accounts-table tr:last-child td, #rate-acc-table tr:last-child td {
         border-bottom: none;
     }
+
     .add-row-btn {
         margin-top: 18px;
-        margin-bottom: 0;
-        width: 160px;
+        padding: 10px 24px;
+        background: var(--primary);
+        color: white;
+        border: none;
+        border-radius: 12px;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
         display: block;
         margin-left: auto;
         margin-right: auto;
     }
-    /* --- Filter Bills Section Styling --- */
-    .filter-card {
-      background: #fff;
-      border-radius: 16px;
-      box-shadow: 0 2px 12px rgba(79,140,255,0.09);
-      padding: 18px 16px 12px 16px;
-      margin-bottom: 18px;
-      max-width: 500px;
-      margin-left: auto;
-      margin-right: auto;
+
+    .add-row-btn:hover {
+        background: var(--primary-dark);
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-md);
     }
-    .filter-fields {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      justify-content: space-between;
-    }
-    .filter-fields label {
-      display: flex;
-      flex-direction: column;
-      font-size: 1rem;
-      color: #4f8cff;
-      flex: 1 1 120px;
-      min-width: 110px;
-    }
-    .filter-fields input, .filter-fields select {
-      margin-top: 4px;
-      padding: 8px 10px;
-      border-radius: 8px;
-      border: 1px solid #e0e6ed;
-      font-size: 1rem;
-      background: #f7faff;
-    }
-    .filter-actions {
-      display: flex;
-      gap: 12px;
-      margin-top: 12px;
-      justify-content: flex-end;
-    }
-    .filter-actions button {
-      padding: 8px 20px;
-      border-radius: 20px;
-      border: none;
-      background: #4f8cff;
-      color: #fff;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: background 0.2s;
-    }
-    .filter-actions .clear-btn {
-      background: #eee;
-      color: #4f8cff;
-      border: 1px solid #4f8cff;
-    }
-    .filter-actions button:hover {
-      background: #f7b731;
-      color: #222;
-    }
-    #filter-results {
-      margin-top: 10px;
-    }
-    .filter-table-container {
-      overflow-x: auto;
-      margin-top: 10px;
-    }
-    .filter-table {
-      width: 100%;
-      border-collapse: collapse;
-      background: #fafdff;
-      border-radius: 12px;
-      overflow: hidden;
-      min-width: 600px;
-    }
-    .filter-table th, .filter-table td {
-      padding: 12px 8px;
-      text-align: center;
-      border-bottom: 1px solid #e0e6ed;
-      font-size: 1rem;
-    }
-    .filter-table th {
-      background: #eaf2ff;
-      color: #4f8cff;
-      font-weight: 600;
-      letter-spacing: 0.5px;
-    }
-    .filter-table tr:last-child td {
-      border-bottom: none;
-    }
-    .filter-table tfoot td {
-      background: #f7b731;
-      color: #222;
-      font-weight: bold;
-    }
-    @media (max-width: 700px) {
-      .distribution-section {
-        flex-direction: column;
-        gap: 18px;
-        padding: 0 4px;
-      }
-      .distribution-box {
-        min-width: unset;
-        width: 100%;
-        margin-bottom: 10px;
-        padding: 18px 8px 14px 8px;
-      }
-      .retailer-box {
-        margin-bottom: 16px;
-        padding: 12px 8px 8px 8px;
-      }
-      .expression-input input {
-        width: 90px;
-        font-size: 1.1rem;
-        padding: 8px 10px;
-      }
-      .save-btn, button, .add-row-btn {
-        font-size: 1.1rem;
-        padding: 12px 0;
-        width: 100%;
-        margin: 10px 0 0 0;
-        border-radius: 24px;
-      }
-      #retailers {
-        margin-bottom: 60px;
-      }
-      .add-retailer-mobile {
-        position: fixed;
-        left: 0; right: 0; bottom: 0;
-        width: 100vw;
-        background: var(--primary);
-        color: #fff;
-        font-size: 1.2rem;
+
+    .save-btn {
+        padding: 10px 24px;
+        background: var(--success);
+        color: white;
         border: none;
-        border-radius: 0;
-        padding: 18px 0;
-        z-index: 100;
-        box-shadow: 0 -2px 12px rgba(79,140,255,0.09);
-      }
-      .filter-table {
-        min-width: 500px;
-        font-size: 0.95rem;
-      }
-      #accounts-section, #half-commission-section {
-        padding: 12px 2px 10px 2px;
-      }
-    }
-    @media (max-width: 900px) {
-        .distribution-section {
-            flex-direction: column;
-            gap: 18px;
-        }
-        #accounts-section, #half-commission-section {
-            padding: 16px 6px 12px 6px;
-        }
+        border-radius: 12px;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        margin-right: 8px;
     }
 
-    /* Modern Retailer Box Styles */
+    .save-btn:hover {
+        background: #059669;
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-md);
+    }
 
-.retailer-box {
-    margin-bottom: 20px;
-    background: linear-gradient(135deg, #fafdff 70%, #eaf2ff 100%);
-    border-radius: 18px;
-    box-shadow: 0 4px 24px rgba(79,140,255,0.13), 0 1.5px 8px rgba(79,140,255,0.07);
-    padding: 18px 18px 12px 18px;
-    border: 1.5px solid #e0e6ed;
-    transition: box-shadow 0.2s, border 0.2s;
-    position: relative;
-    overflow: hidden;
-}
-.retailer-box:hover, .retailer-box:focus-within {
-    box-shadow: 0 8px 32px rgba(79,140,255,0.18), 0 2px 12px rgba(79,140,255,0.09);
-    border: 1.5px solid #4f8cff;
-    background: linear-gradient(135deg, #fafdff 60%, #dbeafe 100%);
-}
-.retailer-name {
-    font-weight: 700;
-    margin-bottom: 10px;
-    color: #4f8cff;
-    font-size: 1.15rem;
-    letter-spacing: 0.5px;
-    text-shadow: 0 1px 0 #fff;
-}
-.expression-input {
-    display: flex;
-    align-items: center;
-    margin: 10px 0;
-    font-size: 1rem;
-    gap: 8px;
-}
-.expression-input label {
-    color: #888;
-    font-size: 1rem;
-    margin-right: 4px;
-}
-.expression-input input {
-    width: 80px;
-    padding: 8px 12px;
-    border-radius: 10px;
-    border: 1.5px solid #e0e6ed;
-    font-size: 1.08rem;
-    background: #f7faff;
-    margin-right: 6px;
-    transition: border 0.2s, box-shadow 0.2s;
-    box-shadow: 0 1px 2px rgba(79,140,255,0.04);
-}
-.expression-input input:focus {
-    border: 1.5px solid #4f8cff;
-    outline: none;
-    background: #eaf2ff;
-}
-.expression-input span {
-    color: #f7b731;
-    font-weight: 600;
-    margin-left: 4px;
-    font-size: 1.08rem;
-    letter-spacing: 0.2px;
-}
-@media (max-width: 700px) {
-    .retailer-box {
-        margin-bottom: 14px;
-        padding: 14px 8px 10px 12px;
+    /* Filter Bills Section Styling */
+    .filter-card {
+        background: var(--card-bg);
         border-radius: 16px;
-        box-shadow: 0 2px 10px rgba(79,140,255,0.10);
+        box-shadow: var(--shadow-md);
+        padding: 20px;
+        margin-bottom: 24px;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+        border: 1px solid var(--border);
     }
-    .retailer-name {
-        font-size: 1.08rem;
-        margin-bottom: 7px;
+
+    .filter-fields {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+        justify-content: space-between;
     }
-    .expression-input {
+
+    .filter-fields label {
+        display: flex;
         flex-direction: column;
-        align-items: flex-start;
-        gap: 2px;
-        font-size: 1.08rem;
+        font-size: 0.875rem;
+        font-weight: 600;
+        color: var(--text-secondary);
+        flex: 1 1 150px;
+        min-width: 120px;
     }
-    .expression-input input {
+
+    .filter-fields label span {
+        color: var(--primary);
+        margin-bottom: 6px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .filter-fields input, .filter-fields select {
+        margin-top: 4px;
+        padding: 10px 12px;
+        border-radius: 8px;
+        border: 2px solid var(--border);
+        font-size: 1rem;
+        background: white;
+        transition: border 0.2s;
+    }
+
+    .filter-fields input:focus, .filter-fields select:focus {
+        outline: none;
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px rgba(37,99,235,0.1);
+    }
+
+    .filter-actions {
+        display: flex;
+        gap: 12px;
+        margin-top: 16px;
+        justify-content: flex-end;
+    }
+
+    .filter-actions button {
+        padding: 10px 24px;
+        border-radius: 12px;
+        border: none;
+        background: var(--primary);
+        color: white;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .filter-actions button:hover {
+        background: var(--primary-dark);
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-md);
+    }
+
+    .filter-actions .clear-btn {
+        background: white;
+        color: var(--primary);
+        border: 2px solid var(--primary);
+    }
+
+    .filter-actions .clear-btn:hover {
+        background: var(--bg-light);
+    }
+
+    #filter-results, #filter-half-results, #rate-acc-filter-results {
+        margin-top: 16px;
+    }
+
+    .filter-table-container {
+        overflow-x: auto;
+        margin-top: 16px;
+        border-radius: 12px;
+        box-shadow: var(--shadow-sm);
+    }
+
+    .filter-table {
         width: 100%;
-        font-size: 1.13rem;
-        margin-bottom: 4px;
-        margin-right: 0;
+        border-collapse: collapse;
+        background: white;
+        min-width: 600px;
     }
-    .expression-input span {
-        font-size: 1.13rem;
-        margin-left: 0;
+
+    .filter-table th, .filter-table td {
+        padding: 12px 10px;
+        text-align: center;
+        border-bottom: 1px solid var(--border);
+        font-size: 1rem;
     }
-}
 
+    .filter-table th {
+        background: #eaf2ff;
+        color: var(--primary);
+        font-weight: 600;
+        letter-spacing: 0.5px;
+    }
 
-/* Modern sum pill for retailer box */
-.sum-pill {
-    display: inline-flex;
-    align-items: center;
-    background: #eaf2ff;
-    color: #2563eb;
-    border-radius: 16px;
-    padding: 2px 12px 2px 8px;
-    font-weight: 600;
-    font-size: 1.08rem;
-    margin-left: 6px;
-    box-shadow: 0 1px 2px rgba(79,140,255,0.07);
-    letter-spacing: 0.2px;
-    border: 1px solid #dbeafe;
-    min-width: 32px;
-}
-.sum-icon {
-    font-size: 1.05em;
-    margin-right: 5px;
-    opacity: 0.7;
-}
+    .filter-table tr:last-child td {
+        border-bottom: none;
+    }
 
+    .filter-table tfoot td {
+        background: var(--accent);
+        color: white;
+        font-weight: 700;
+        font-size: 1.1rem;
+    }
 
+    #shareBillsButton {
+        padding: 12px 28px;
+        background: var(--success);
+        color: white;
+        border: none;
+        border-radius: 12px;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: block;
+        margin: 20px auto;
+    }
+
+    #shareBillsButton:hover {
+        background: #059669;
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-md);
+    }
     
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .container {
+            padding: 1.5rem 1rem;
+        }
+        
+        .dashboard-grid {
+            grid-template-columns: 1fr;
+        }
+        
+        .retailers-grid {
+            grid-template-columns: 1fr;
+        }
+        
+        .app-title {
+            font-size: 1.5rem;
+        }
+        
+        .nav-buttons {
+            gap: 0.5rem;
+        }
+        
+        .nav-btn {
+            padding: 0.5rem 1rem;
+            font-size: 0.85rem;
+        }
+        
+        .btn-group {
+            flex-direction: column;
+        }
+        
+        .btn {
+            width: 100%;
+        }
+        
+        .fab-container {
+            bottom: 1rem;
+            right: 1rem;
+        }
+        
+        .fab {
+            width: 56px;
+            height: 56px;
+        }
+
+        #accounts-section, #half-commission-section, #rate-acc-section {
+            padding: 20px 16px;
+        }
+
+        .filter-table {
+            font-size: 0.9rem;
+        }
+    }
+    
+    @media (max-width: 480px) {
+        .header-content {
+            padding: 0 1rem;
+        }
+        
+        .card-icon {
+            width: 40px;
+            height: 40px;
+            font-size: 1.25rem;
+        }
+        
+        .card-title {
+            font-size: 1.1rem;
+        }
+        
+        .stat-value {
+            font-size: 1.25rem;
+        }
+
+        .input-field-inline {
+            padding-right: 3.5rem;
+        }
+
+        .sum-badge {
+            font-size: 0.75rem;
+            padding: 0.2rem 0.5rem;
+        }
+    }
+    
+    /* Hidden sections */
+    .hidden {
+        display: none;
+    }
     </style>
 </head>
 <body>
-<nav>
-  <button onclick="window.location.href='home.html'">🏠 Home</button>
-  <button onclick="showSection('distribution')">Distribution</button>
-  <button onclick="showSection('accounts')">Accounts</button>
-  <button onclick="showSection('filter')">Filter Bills</button>
-  <button onclick="showSection('half-commission')">Half Commission Accounts</button>
-  <button onclick="showSection('filter-half-commission')">Filter Half Commission</button>
-  <button onclick="showSection('rate-acc')">Rate Acc</button>
-</nav>
-<!-- Distribution Section -->
-<div id="distribution-section">
-    <h2>Mallige & Jaji Distribution</h2>
-    <div class="distribution-section">
-        <div class="distribution-box">
-            <h3>1st Distribution</h3>
-            <label for="firstM">M</label>
-            <input type="text" id="firstM" readonly>
-            <label for="firstJ">J</label>
-            <input type="text" id="firstJ" readonly>
-            <button class="save-btn" onclick="saveFirstDistribution()">SAVE</button>
-            <button class="save-btn" onclick="unsaveFirstDistribution()">UNSAVE</button>
+    <!-- Header -->
+    <header class="app-header">
+        <div class="header-content">
+            <h1 class="app-title">🌸 Mallige & Jaji Distribution</h1>
+            <nav class="nav-buttons">
+                <button class="nav-btn" onclick="window.location.href='home.html'">🏠 Home</button>
+                <button class="nav-btn" onclick="showSection('distribution')">📊 Distribution</button>
+                <button class="nav-btn" onclick="showSection('accounts')">💰 Accounts</button>
+                <button class="nav-btn" onclick="showSection('filter')">🔍 Filter Bills</button>
+                <button class="nav-btn" onclick="showSection('half-commission')">📋 Half Commission</button>
+                <button class="nav-btn" onclick="showSection('filter-half-commission')">🔍 Filter Half</button>
+                <button class="nav-btn" onclick="showSection('rate-acc')">📈 Rate Acc</button>
+            </nav>
         </div>
-        <div class="distribution-box">
-            <h3>2nd Distribution</h3>
-            <label for="secondM">M</label>
-            <input type="text" id="secondM" readonly>
-            <label for="secondJ">J</label>
-            <input type="text" id="secondJ" readonly>
+    </header>
+
+    <!-- Distribution Section -->
+    <div id="distribution-section" class="container">
+        <!-- Dashboard Cards -->
+        <div class="dashboard-grid">
+            <!-- 1st Distribution Card -->
+            <div class="dashboard-card">
+                <div class="card-header">
+                    <div class="card-icon">1️⃣</div>
+                    <h3 class="card-title">1st Distribution</h3>
+                </div>
+                <div class="card-body">
+                    <div class="input-group">
+                        <label class="input-label">Mallige (M)</label>
+                        <input type="text" id="firstM" class="input-field" readonly>
+                    </div>
+                    <div class="input-group">
+                        <label class="input-label">Jaji (J)</label>
+                        <input type="text" id="firstJ" class="input-field" readonly>
+                    </div>
+                    <div class="btn-group">
+                        <button class="btn btn-success" onclick="saveFirstDistribution()">
+                            💾 Save
+                        </button>
+                        <button class="btn btn-secondary" onclick="unsaveFirstDistribution()">
+                            ↩️ Unsave
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2nd Distribution Card -->
+            <div class="dashboard-card">
+                <div class="card-header">
+                    <div class="card-icon">2️⃣</div>
+                    <h3 class="card-title">2nd Distribution</h3>
+                </div>
+                <div class="card-body">
+                    <div class="input-group">
+                        <label class="input-label">Mallige (M)</label>
+                        <input type="text" id="secondM" class="input-field" readonly>
+                    </div>
+                    <div class="input-group">
+                        <label class="input-label">Jaji (J)</label>
+                        <input type="text" id="secondJ" class="input-field" readonly>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Totals Card -->
+            <div class="dashboard-card">
+                <div class="card-header">
+                    <div class="card-icon">📊</div>
+                    <h3 class="card-title">Totals & Approximates</h3>
+                </div>
+                <div class="card-body">
+                    <div class="stat-row">
+                        <span class="stat-label">Total M:</span>
+                        <span class="stat-value" id="totalM">0</span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-label">Total J:</span>
+                        <span class="stat-value" id="totalJ">0</span>
+                    </div>
+                    <div class="input-group">
+                        <label class="input-label">Approximate M</label>
+                        <input type="text" id="approxM" class="input-field" oninput="setInitialApprox('M')">
+                    </div>
+                    <div class="input-group">
+                        <label class="input-label">Approximate J</label>
+                        <input type="text" id="approxJ" class="input-field" oninput="setInitialApprox('J')">
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="distribution-box">
-            <h3>Totals</h3>
-            <div>Total M: <span id="totalM">0</span></div>
-            <div>Total J: <span id="totalJ">0</span></div>
-            <label>Approximate M</label>
-            <input type="text" id="approxM" oninput="setInitialApprox('M')">
-            <label>Approximate J</label>
-            <input type="text" id="approxJ" oninput="setInitialApprox('J')">
+
+        <!-- Retailers Section -->
+        <div class="section-header">
+            <h2 class="section-title">Retailers</h2>
+        </div>
+        <div id="retailers" class="retailers-grid"></div>
+
+        <!-- Floating Action Buttons -->
+        <div class="fab-container">
+            <button class="fab" onclick="addRetailer()" title="Add Retailer">
+                ➕
+            </button>
+            <button class="fab fab-danger" onclick="resetDistribution()" title="Reset Distribution">
+                🔄
+            </button>
         </div>
     </div>
-    <div id="retailers"></div>
-    <button class="add-retailer-mobile" onclick="addRetailer()">Add Retailer +</button>
-<button class="add-retailer-mobile" style="background:#e74c3c;margin-top:10px;" onclick="resetDistribution()">Reset Distribution</button>
-</div>
 
-<!-- Accounts Section -->
-<div id="accounts-section" style="display:none;">
-  <h2>Accounts</h2>
-  <div>
-    <label for="accountsDate">Date</label>
-    <input type="date" id="accountsDate" required>
-    <label for="rateM">M Rate</label>
-    <input type="number" step="any" id="rateM" value="0" onchange="updateAccountsTable()">
-    <label for="rateJ">J Rate</label>
-    <input type="number" step="any" id="rateJ" value="0" onchange="updateAccountsTable()">
-    <button class="save-btn" onclick="saveAccounts()">Save</button>
-  </div>
-  <table border="1" id="accounts-table">
-    <thead>
-      <tr>
-        <th>Retailor</th>
-        <th>M</th>
-        <th>J</th>
-        <th>M.Rate</th>
-        <th>J.Rate</th>
-        <th>M.Total</th>
-        <th>J.Total</th>
-        <th>Total</th>
-      </tr>
-    </thead>
-    <tbody id="accounts-tbody">
-      <!-- Rows will be filled by JS -->
-    </tbody>
-  </table>
-</div>
-
-<!-- Filter Bills Section -->
-<div id="filter-section" style="display:none;">
-  <h2>Filter Bills</h2>
-  <div class="filter-card">
-    <div class="filter-fields">
-      <label>
-        <span>From</span>
-        <input type="date" id="filterFrom">
-      </label>
-      <label>
-        <span>Till</span>
-        <input type="date" id="filterTill">
-      </label>
-      <label>
-        <span>Retailer</span>
-        <select id="filterRetailer">
-          <option value="">All</option>
-          <option value="AR">AR</option>
-          <option value="MM">MM</option>
-          <option value="jana">jana</option>
-          <option value="ashok">ashok</option>
-          <option value="SKI">SKI</option>
-          <option value="Ranga">Ranga</option>
-          <option value="iqbal">iqbal</option>
-          <option value="PVS">PVS</option>
-          <option value="Monthu">Monthu</option>
-          <option value="Inchu">Inchu</option>
-          <option value="Manju">Manju</option>
-          <option value="Abuta">Abuta</option>
-          <option value="Hussaian">Hussaian</option>
-        </select>
-      </label>
+    <!-- Accounts Section -->
+    <div id="accounts-section" class="hidden">
+        <div class="container">
+            <h2>💰 Accounts</h2>
+            <div>
+                <label for="accountsDate">Date</label>
+                <input type="date" id="accountsDate" required>
+                <label for="rateM">M Rate</label>
+                <input type="number" step="any" id="rateM" value="0" onchange="updateAccountsTable()">
+                <label for="rateJ">J Rate</label>
+                <input type="number" step="any" id="rateJ" value="0" onchange="updateAccountsTable()">
+                <button class="save-btn" onclick="saveAccounts()">Save</button>
+            </div>
+            <table border="1" id="accounts-table">
+                <thead>
+                    <tr>
+                        <th>Retailor</th>
+                        <th>M</th>
+                        <th>J</th>
+                        <th>M.Rate</th>
+                        <th>J.Rate</th>
+                        <th>M.Total</th>
+                        <th>J.Total</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody id="accounts-tbody"></tbody>
+            </table>
+        </div>
     </div>
-    <div class="filter-actions">
-      <button onclick="filterBills()">Filter</button>
-      <button class="clear-btn" onclick="clearFilter()">Clear</button>
+
+    <!-- Filter Bills Section -->
+    <div id="filter-section" class="hidden">
+        <div class="container">
+            <h2 style="text-align:center; color:var(--primary); margin-bottom:2rem; font-size:1.75rem;">🔍 Filter Bills</h2>
+            <div class="filter-card">
+                <div class="filter-fields">
+                    <label>
+                        <span>From</span>
+                        <input type="date" id="filterFrom">
+                    </label>
+                    <label>
+                        <span>Till</span>
+                        <input type="date" id="filterTill">
+                    </label>
+                    <label>
+                        <span>Retailer</span>
+                        <select id="filterRetailer">
+                            <option value="">All</option>
+                            <option value="AR">AR</option>
+                            <option value="MM">MM</option>
+                            <option value="jana">jana</option>
+                            <option value="ashok">ashok</option>
+                            <option value="SKI">SKI</option>
+                            <option value="Ranga">Ranga</option>
+                            <option value="iqbal">iqbal</option>
+                            <option value="PVS">PVS</option>
+                            <option value="Monthu">Monthu</option>
+                            <option value="Inchu">Inchu</option>
+                            <option value="Manju">Manju</option>
+                            <option value="Abuta">Abuta</option>
+                            <option value="Hussaian">Hussaian</option>
+                        </select>
+                    </label>
+                </div>
+                <div class="filter-actions">
+                    <button onclick="filterBills()">Filter</button>
+                    <button class="clear-btn" onclick="clearFilter()">Clear</button>
+                </div>
+            </div>
+            <div id="filter-results"></div>
+            <button id="shareBillsButton" style="display:none;" onclick="shareBills()">📤 Share Bills</button>
+        </div>
     </div>
-  </div>
-  <div id="filter-results"></div>
-<button id="shareBillsButton" style="display:none;margin-top:12px;" onclick="shareBills()">Share Bills</button>
-</div>
 
-<!-- Half Commission Accounts Section -->
-<div id="half-commission-section" style="display:none;">
-  <h2>Half Commission Accounts</h2>
-  <div>
-    <label for="halfAccountsDate">Date</label>
-    <input type="date" id="halfAccountsDate" required>
-    <label for="halfRateM">M Rate</label>
-    <input type="number" step="any" id="halfRateM" value="0" onchange="updateHalfAccountsTable()">
-    <label for="halfRateJ">J Rate</label>
-    <input type="number" step="any" id="halfRateJ" value="0" onchange="updateHalfAccountsTable()">
-    <button class="save-btn" onclick="saveHalfAccounts()">Save</button>
-  </div>
-  <table border="1" id="half-accounts-table" class="table">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>M</th>
-        <th>J</th>
-        <th>M.Rate</th>
-        <th>J.Rate</th>
-        <th>M.Total</th>
-        <th>J.Total</th>
-        <th>Total</th>
-      </tr>
-    </thead>
-    <tbody id="half-accounts-tbody">
-      <!-- Rows will be filled by JS -->
-    </tbody>
-  </table>
-  <button class="add-row-btn" onclick="addHalfCommissionRow()">Add Row</button>
-</div>
-
-
-
-<!-- Filter Half Commission Section -->
-<div id="filter-half-commission-section" style="display:none;">
-  <h2>Filter Half Commission</h2>
-  <div class="filter-card">
-    <div class="filter-fields">
-      <label>
-        <span>From</span>
-        <input type="date" id="filterHalfFrom">
-      </label>
-      <label>
-        <span>Till</span>
-        <input type="date" id="filterHalfTill">
-      </label>
-      <label>
-        <span>Name</span>
-        <select id="filterHalfRetailer">
-          <option value="">All</option>
-          <!-- Options will be filled by JS -->
-        </select>
-      </label>
+    <!-- Half Commission Accounts Section -->
+    <div id="half-commission-section" class="hidden">
+        <div class="container">
+            <h2>📋 Half Commission Accounts</h2>
+            <div>
+                <label for="halfAccountsDate">Date</label>
+                <input type="date" id="halfAccountsDate" required>
+                <label for="halfRateM">M Rate</label>
+                <input type="number" step="any" id="halfRateM" value="0" onchange="updateHalfAccountsTable()">
+                <label for="halfRateJ">J Rate</label>
+                <input type="number" step="any" id="halfRateJ" value="0" onchange="updateHalfAccountsTable()">
+                <button class="save-btn" onclick="saveHalfAccounts()">Save</button>
+            </div>
+            <table border="1" id="half-accounts-table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>M</th>
+                        <th>J</th>
+                        <th>M.Rate</th>
+                        <th>J.Rate</th>
+                        <th>M.Total</th>
+                        <th>J.Total</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody id="half-accounts-tbody"></tbody>
+            </table>
+            <button class="add-row-btn" onclick="addHalfCommissionRow()">Add Row</button>
+        </div>
     </div>
-    <div class="filter-actions">
-      <button onclick="filterHalfCommission()">Filter</button>
-      <button class="clear-btn" onclick="clearFilterHalfCommission()">Clear</button>
+
+    <!-- Filter Half Commission Section -->
+    <div id="filter-half-commission-section" class="hidden">
+        <div class="container">
+            <h2 style="text-align:center; color:var(--primary); margin-bottom:2rem; font-size:1.75rem;">🔍 Filter Half Commission</h2>
+            <div class="filter-card">
+                <div class="filter-fields">
+                    <label>
+                        <span>From</span>
+                        <input type="date" id="filterHalfFrom">
+                    </label>
+                    <label>
+                        <span>Till</span>
+                        <input type="date" id="filterHalfTill">
+                    </label>
+                    <label>
+                        <span>Name</span>
+                        <select id="filterHalfRetailer">
+                            <option value="">All</option>
+                        </select>
+                    </label>
+                </div>
+                <div class="filter-actions">
+                    <button onclick="filterHalfCommission()">Filter</button>
+                    <button class="clear-btn" onclick="clearFilterHalfCommission()">Clear</button>
+                </div>
+            </div>
+            <div id="filter-half-results"></div>
+        </div>
     </div>
-  </div>
-  <div id="filter-half-results"></div>
-</div>
 
+    <!-- Rate Acc Section -->
+    <div id="rate-acc-section" class="hidden">
+        <div class="container">
+            <h2>📈 Rate Acc</h2>
+            <div>
+                <label for="rateAccDate">Date</label>
+                <input type="date" id="rateAccDate" required>
+                <label for="rateAccM">M Rate</label>
+                <input type="number" step="any" id="rateAccM" value="0" onchange="updateRateAccTable()">
+                <label for="rateAccJ">J Rate</label>
+                <input type="number" step="any" id="rateAccJ" value="0" onchange="updateRateAccTable()">
+                <button class="save-btn" onclick="saveRateAcc()">Save</button>
+            </div>
+            <div style="overflow-x:auto;">
+                <table border="1" id="rate-acc-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Given M</th>
+                            <th>Taken M</th>
+                            <th>Given J</th>
+                            <th>Taken J</th>
+                            <th>M Rate</th>
+                            <th>J Rate</th>
+                            <th>Given M Total</th>
+                            <th>Taken M Total</th>
+                            <th>Given J Total</th>
+                            <th>Taken J Total</th>
+                        </tr>
+                    </thead>
+                    <tbody id="rate-acc-tbody"></tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="7" style="text-align:right; font-weight:700;">Grand Total M:</td>
+                            <td id="grandGivenMTotal"></td>
+                            <td id="grandTakenMTotal"></td>
+                            <td id="grandGivenJTotal"></td>
+                            <td id="grandTakenJTotal"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="7" style="text-align:right; font-weight:700;">Grand Total M (Net):</td>
+                            <td colspan="2" id="grandMNet"></td>
+                            <td colspan="2" id="grandJNet"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="7" style="text-align:right; font-weight:700;">Overall Bill Total:</td>
+                            <td colspan="4" id="overallBillTotal"></td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
 
-<!-- Rate Acc Section -->
-<div id="rate-acc-section" style="display:none;">
-  <h2>Rate Acc</h2>
-  <div>
-    <label for="rateAccDate">Date</label>
-    <input type="date" id="rateAccDate" required>
-    <label for="rateAccM">M Rate</label>
-    <input type="number" step="any" id="rateAccM" value="0" onchange="updateRateAccTable()">
-    <label for="rateAccJ">J Rate</label>
-    <input type="number" step="any" id="rateAccJ" value="0" onchange="updateRateAccTable()">
-    <button class="save-btn" onclick="saveRateAcc()">Save</button>
-  </div>
-  <table border="1" id="rate-acc-table" class="table">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Given M</th>
-        <th>Taken M</th>
-        <th>Given J</th>
-        <th>Taken J</th>
-        <th>M Rate</th>
-        <th>J Rate</th>
-        <th>Given M Total</th>
-        <th>Taken M Total</th>
-        <th>Given J Total</th>
-        <th>Taken J Total</th>
-      </tr>
-    </thead>
-    <tbody id="rate-acc-tbody">
-      <!-- Rows will be filled by JS -->
-    </tbody>
-    <tfoot>
-      <tr>
-        <td colspan="7" style="text-align:right;">Grand Total M:</td>
-        <td id="grandGivenMTotal"></td>
-        <td id="grandTakenMTotal"></td>
-        <td id="grandGivenJTotal"></td>
-        <td id="grandTakenJTotal"></td>
-      </tr>
-      <tr>
-        <td colspan="7" style="text-align:right;">Grand Total M (Net):</td>
-        <td colspan="2" id="grandMNet"></td>
-        <td colspan="2" id="grandJNet"></td>
-      </tr>
-      <tr>
-        <td colspan="7" style="text-align:right;">Overall Bill Total:</td>
-        <td colspan="4" id="overallBillTotal"></td>
-      </tr>
-    </tfoot>
-  </table>
-
-  <!-- Rate Acc Filter Section (inserted here) -->
-  <div id="rate-acc-filter-section" style="margin-top:32px;">
-    <h3>Filter Rate Acc</h3>
-    <div class="filter-card">
-      <div class="filter-fields">
-        <label>
-          <span>From</span>
-          <input type="date" id="filterRateAccFrom">
-        </label>
-        <label>
-          <span>Till</span>
-          <input type="date" id="filterRateAccTill">
-        </label>
-        <label>
-          <span>Name</span>
-          <select id="filterRateAccName">
-            <option value="">All</option>
-            <option value="Monthu">Monthu</option>
-            <option value="Inchu">Inchu</option>
-            <option value="Manju">Manju</option>
-            <option value="Abuta">Abuta</option>
-            <option value="Hussaian">Hussaian</option>
-          </select>
-        </label>
-      </div>
-      <div class="filter-actions">
-        <button onclick="filterRateAcc()">Filter</button>
-        <button class="clear-btn" onclick="clearFilterRateAcc()">Clear</button>
-      </div>
+            <!-- Rate Acc Filter Section -->
+            <div id="rate-acc-filter-section" style="margin-top:32px;">
+                <h3 style="color:var(--primary); margin-bottom:1rem;">Filter Rate Acc</h3>
+                <div class="filter-card">
+                    <div class="filter-fields">
+                        <label>
+                            <span>From</span>
+                            <input type="date" id="filterRateAccFrom">
+                        </label>
+                        <label>
+                            <span>Till</span>
+                            <input type="date" id="filterRateAccTill">
+                        </label>
+                        <label>
+                            <span>Name</span>
+                            <select id="filterRateAccName">
+                                <option value="">All</option>
+                                <option value="Monthu">Monthu</option>
+                                <option value="Inchu">Inchu</option>
+                                <option value="Manju">Manju</option>
+                                <option value="Abuta">Abuta</option>
+                                <option value="Hussaian">Hussaian</option>
+                            </select>
+                        </label>
+                    </div>
+                    <div class="filter-actions">
+                        <button onclick="filterRateAcc()">Filter</button>
+                        <button class="clear-btn" onclick="clearFilterRateAcc()">Clear</button>
+                    </div>
+                </div>
+                <div id="rate-acc-filter-results"></div>
+            </div>
+        </div>
     </div>
-    <div id="rate-acc-filter-results"></div>
-  </div>
-</div>
 
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+    <script>
+        const API_BASE = "/";
 
+        let retailerNames = ["AR", "MM", "jana", "ashok", "SKI", "Ranga", "iqbal", "PVS"];
+        let filterRetailerNames = [
+            ...retailerNames,
+            "Monthu", "Inchu", "Manju", "Abuta", "Hussaian"
+        ];
+        let retailers = [];
+        let savedFirst = false;
 
-<script src="scripts/main.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+        let initialApproxM = null;
+        let initialApproxJ = null;
+        let approxBaseM = 0;
+        let approxBaseJ = 0;
 
+        const halfCommissionNames = [
+            "UK", "sundara", "ragu", "muddu", "Ravi","Sanjeeva", "Ramesh", "Sukesh", "Rajesh", "Anni", "HS", "Arun"
+        ];
+        let halfCommissionRows = halfCommissionNames.map(name => ({
+            name,
+            m: "",
+            j: ""
+        }));
 
+        const rateAccNames = ["Monthu", "Inchu", "Manju", "Abuta", "Hussaian"];
+        let rateAccRows = rateAccNames.map(name => ({
+            name,
+            givenM: "",
+            takenM: "",
+            givenJ: "",
+            takenJ: ""
+        }));
+
+        function saveDistributionToLocal() {
+            const data = {
+                retailers,
+                savedFirst,
+                initialApproxM,
+                initialApproxJ,
+                approxBaseM,
+                approxBaseJ
+            };
+            localStorage.setItem('distribution_autosave', JSON.stringify(data));
+        }
+
+        function loadDistributionFromLocal() {
+            const data = localStorage.getItem('distribution_autosave');
+            if (data) {
+                try {
+                    const parsed = JSON.parse(data);
+                    if (parsed.retailers && Array.isArray(parsed.retailers)) {
+                        retailers = parsed.retailers;
+                    }
+                    if (typeof parsed.savedFirst === "boolean") savedFirst = parsed.savedFirst;
+                    if (typeof parsed.initialApproxM !== "undefined") initialApproxM = parsed.initialApproxM;
+                    if (typeof parsed.initialApproxJ !== "undefined") initialApproxJ = parsed.initialApproxJ;
+                    if (typeof parsed.approxBaseM !== "undefined") approxBaseM = parsed.approxBaseM;
+                    if (typeof parsed.approxBaseJ !== "undefined") approxBaseJ = parsed.approxBaseJ;
+                } catch (e) {}
+            }
+        }
+
+        function resetDistribution() {
+            if (!confirm('Are you sure you want to reset all distribution data?')) return;
+            localStorage.removeItem('distribution_autosave');
+            retailers = retailerNames.map(name => ({
+                name,
+                mFrozen: '',
+                jFrozen: '',
+                mNew: '',
+                jNew: ''
+            }));
+            savedFirst = false;
+            initialApproxM = null;
+            initialApproxJ = null;
+            approxBaseM = 0;
+            approxBaseJ = 0;
+            renderRetailers();
+            updateTotals();
+        }
+
+        function sum(str) {
+            if (!str) return 0;
+            return str
+                .split('+')
+                .map(v => parseFloat(v.trim()) || 0)
+                .reduce((a, b) => a + b, 0);
+        }
+
+        function renderRetailers() {
+            const retailersDiv = document.getElementById('retailers');
+            retailersDiv.innerHTML = '';
+            retailers.forEach((r, i) => {
+                const initials = r.name.substring(0, 2).toUpperCase();
+                const mValue = r.mFrozen + (r.mNew ? '+' + r.mNew : '');
+                const jValue = r.jFrozen + (r.jNew ? '+' + r.jNew : '');
+                const mSum = sum(mValue);
+                const jSum = sum(jValue);
+                
+                const card = document.createElement('div');
+                card.className = 'retailer-card';
+                card.innerHTML = `
+                    <div class="retailer-header">
+                        <div class="retailer-avatar">${initials}</div>
+                        <div class="retailer-name">${r.name}</div>
+                    </div>
+                    <div class="retailer-inputs">
+                        <div class="input-row">
+                            <span class="input-label-inline">M:</span>
+                            <div class="input-wrapper">
+                                <input type="text" id="m_${i}" class="input-field-inline" value="${mValue}" oninput="handleInput(${i}, 'm')">
+                                <span class="sum-badge">= ${mSum}</span>
+                            </div>
+                        </div>
+                        <div class="input-row">
+                            <span class="input-label-inline">J:</span>
+                            <div class="input-wrapper">
+                                <input type="text" id="j_${i}" class="input-field-inline" value="${jValue}" oninput="handleInput(${i}, 'j')">
+                                <span class="sum-badge">= ${jSum}</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                retailersDiv.appendChild(card);
+            });
+            updateTotals();
+        }
+
+        function updateTotals() {
+            let totalM1 = 0, totalJ1 = 0, totalM2 = 0, totalJ2 = 0;
+            retailers.forEach((r, i) => {
+                totalM1 += sum(r.mFrozen);
+                totalJ1 += sum(r.jFrozen);
+                totalM2 += sum(r.mNew);
+                totalJ2 += sum(r.jNew);
+
+                const mInput = document.getElementById(`m_${i}`);
+                const jInput = document.getElementById(`j_${i}`);
+                if (mInput) mInput.value = r.mFrozen + (r.mNew ? '+' + r.mNew : '');
+                if (jInput) jInput.value = r.jFrozen + (r.jNew ? '+' + r.jNew : '');
+            });
+
+            document.getElementById('firstM').value = totalM1;
+            document.getElementById('firstJ').value = totalJ1;
+            document.getElementById('secondM').value = totalM2;
+            document.getElementById('secondJ').value = totalJ2;
+            document.getElementById('totalM').innerText = totalM1 + totalM2;
+            document.getElementById('totalJ').innerText = totalJ1 + totalJ2;
+
+            const approxMInput = document.getElementById('approxM');
+            const approxJInput = document.getElementById('approxJ');
+            const totalDistributedM = totalM1 + totalM2;
+            const totalDistributedJ = totalJ1 + totalJ2;
+
+            if (approxMInput && initialApproxM !== null) {
+                let remainM = initialApproxM - (totalDistributedM - approxBaseM);
+                if (remainM < 0) remainM = 0;
+                approxMInput.value = remainM;
+            }
+            if (approxJInput && initialApproxJ !== null) {
+                let remainJ = initialApproxJ - (totalDistributedJ - approxBaseJ);
+                if (remainJ < 0) remainJ = 0;
+                approxJInput.value = remainJ;
+            }
+        }
+
+        function handleInput(id, type) {
+            let input = document.getElementById(`${type}_${id}`);
+            let value = input.value;
+
+            if (!savedFirst) {
+                retailers[id][type + 'Frozen'] = value;
+                retailers[id][type + 'New'] = '';
+            } else {
+                let frozen = retailers[id][type + 'Frozen'];
+                if (!value.startsWith(frozen)) {
+                    input.value = frozen + (retailers[id][type + 'New'] ? '+' + retailers[id][type + 'New'] : '');
+                    return;
+                }
+                let newPart = value.slice(frozen.length);
+                if (newPart.startsWith('+')) newPart = newPart.slice(1);
+                retailers[id][type + 'New'] = newPart;
+            }
+            updateTotals();
+            saveDistributionToLocal();
+        }
+
+        function addRetailer(name = '') {
+            if (!name) {
+                name = prompt("Enter retailer name:");
+                if (!name) return;
+            }
+            if (retailers.some(r => r.name === name)) {
+                alert("Retailer already exists!");
+                return;
+            }
+            retailers.push({ name, mFrozen: '', jFrozen: '', mNew: '', jNew: '' });
+            renderRetailers();
+            updateAccountsTable();
+            saveDistributionToLocal();
+        }
+
+        function saveFirstDistribution() {
+            if (savedFirst) {
+                alert("First distribution is already saved!");
+                return;
+            }
+            retailers.forEach((r, i) => {
+                r.mFrozen = document.getElementById(`m_${i}`).value;
+                r.jFrozen = document.getElementById(`j_${i}`).value;
+                r.mNew = '';
+                r.jNew = '';
+            });
+            savedFirst = true;
+            renderRetailers();
+            updateTotals();
+            saveDistributionToLocal();
+            alert("First distribution saved successfully!");
+        }
+
+        function unsaveFirstDistribution() {
+            if (!savedFirst) {
+                alert("First distribution is not saved yet!");
+                return;
+            }
+            retailers.forEach((r, i) => {
+                r.mNew = '';
+                r.jNew = '';
+            });
+            savedFirst = false;
+            renderRetailers();
+            updateTotals();
+            saveDistributionToLocal();
+            alert("First distribution unsaved!");
+        }
+
+        function setInitialApprox(type) {
+            let totalM = 0, totalJ = 0;
+            retailers.forEach(r => {
+                totalM += sum(r.mFrozen) + sum(r.mNew);
+                totalJ += sum(r.jFrozen) + sum(r.jNew);
+            });
+
+            if (type === 'M') {
+                const approxMInput = document.getElementById('approxM');
+                if (approxMInput.value === "" || isNaN(parseFloat(approxMInput.value))) {
+                    initialApproxM = null;
+                } else {
+                    initialApproxM = parseFloat(approxMInput.value);
+                    approxBaseM = totalM;
+                }
+            } else if (type === 'J') {
+                const approxJInput = document.getElementById('approxJ');
+                if (approxJInput.value === "" || isNaN(parseFloat(approxJInput.value))) {
+                    initialApproxJ = null;
+                } else {
+                    initialApproxJ = parseFloat(approxJInput.value);
+                    approxBaseJ = totalJ;
+                }
+            }
+            updateTotals();
+            saveDistributionToLocal();
+        }
+
+        function showSection(section) {
+            document.getElementById('distribution-section').style.display = 'none';
+            document.getElementById('accounts-section').style.display = 'none';
+            document.getElementById('filter-section').style.display = 'none';
+            document.getElementById('half-commission-section').style.display = 'none';
+            document.getElementById('filter-half-commission-section').style.display = 'none';
+            document.getElementById('rate-acc-section').style.display = 'none';
+
+            if (section === 'distribution') {
+                document.getElementById('distribution-section').style.display = 'block';
+                renderRetailers();
+            } else if (section === 'accounts') {
+                document.getElementById('accounts-section').style.display = 'block';
+                updateAccountsTable();
+                const dateInput = document.getElementById('accountsDate');
+                if (dateInput && !dateInput.value) {
+                    dateInput.valueAsDate = new Date();
+                }
+            } else if (section === 'filter') {
+                document.getElementById('filter-section').style.display = 'block';
+            } else if (section === 'half-commission') {
+                document.getElementById('half-commission-section').style.display = 'block';
+                updateHalfAccountsTable();
+                const dateInput = document.getElementById('halfAccountsDate');
+                if (dateInput && !dateInput.value) {
+                    dateInput.valueAsDate = new Date();
+                }
+            } else if (section === 'filter-half-commission') {
+                document.getElementById('filter-half-commission-section').style.display = 'block';
+                populateHalfCommissionDropdown();
+            } else if (section === 'rate-acc') {
+                document.getElementById('rate-acc-section').style.display = 'block';
+                updateRateAccTable();
+            }
+        }
+
+        function updateAccountsTable() {
+            const rateM = parseFloat(document.getElementById('rateM').value) || 0;
+            const rateJ = parseFloat(document.getElementById('rateJ').value) || 0;
+            const tbody = document.getElementById('accounts-tbody');
+            tbody.innerHTML = '';
+            retailers.forEach((r, i) => {
+                const mQty = sum(r.mFrozen + (r.mNew ? '+' + r.mNew : ''));
+                const jQty = sum(r.jFrozen + (r.jNew ? '+' + r.jNew : ''));
+                const mTotal = mQty * rateM;
+                const jTotal = jQty * rateJ;
+                const total = mTotal + jTotal;
+                tbody.innerHTML += `
+                  <tr>
+                    <td>${r.name}</td>
+                    <td>${mQty}</td>
+                    <td>${jQty}</td>
+                    <td>${rateM}</td>
+                    <td>${rateJ}</td>
+                    <td>${mTotal}</td>
+                    <td>${jTotal}</td>
+                    <td>${total}</td>
+                  </tr>
+                `;
+            });
+        }
+
+        async function saveAccounts() {
+            const date = document.getElementById('accountsDate').value;
+            const rateM = parseFloat(document.getElementById('rateM').value) || 0;
+            const rateJ = parseFloat(document.getElementById('rateJ').value) || 0;
+            if (!date) {
+                alert("Please select a date for the account.");
+                return;
+            }
+            const rows = retailers.map(r => {
+                const mQty = sum(r.mFrozen + (r.mNew ? '+' + r.mNew : ''));
+                const jQty = sum(r.jFrozen + (r.jNew ? '+' + r.jNew : ''));
+                const mTotal = mQty * rateM;
+                const jTotal = jQty * rateJ;
+                return {
+                    retailer: r.name,
+                    m_qty: mQty,
+                    j_qty: jQty,
+                    m_rate: rateM,
+                    j_rate: rateJ,
+                    m_total: mTotal,
+                    j_total: jTotal,
+                    total: mTotal + jTotal
+                };
+            });
+            try {
+                const res = await fetch("/api/accounts", {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ date, rows })
+                });
+                if (res.ok) {
+                    alert("Accounts saved!");
+                } else {
+                    const err = await res.text();
+                    alert("Failed to save accounts: " + err);
+                }
+            } catch (e) {
+                alert("Network error: " + e.message);
+            }
+        }
+
+        async function filterBills() {
+            const from = document.getElementById('filterFrom').value;
+            const till = document.getElementById('filterTill').value;
+            const retailer = document.getElementById('filterRetailer').value;
+            if (!from || !till) {
+                alert("Please select both dates.");
+                return;
+            }
+            let url = `/api/filter-bills?from=${from}&till=${till}`;
+            if (retailer) {
+                url += `&retailer=${encodeURIComponent(retailer)}`;
+            }
+            const res = await fetch(url);
+            const data = await res.json();
+            renderFilterResults(data);
+        }
+
+        let lastBillText = "";
+
+        function renderFilterResults(data) {
+            const container = document.getElementById('filter-results');
+            const shareBtn = document.getElementById('shareBillsButton');
+            if (!data.length) {
+                container.innerHTML = "<div style='text-align:center;color:#888;padding:18px;'>No data found for selected dates.</div>";
+                if (shareBtn) shareBtn.style.display = "none";
+                lastBillText = "";
+                return;
+            }
+            let text = "Date\tRetailer\tM\tM.Rate\tJ\tJ.Rate\tM.Total\tJ.Total\tTotal\n";
+            let html = `<div class="filter-table-container"><table class="filter-table">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Retailer</th>
+                        <th>M</th>
+                        <th>M.Rate</th>
+                        <th>J</th>
+                        <th>J.Rate</th>
+                        <th>M.Total</th>
+                        <th>J.Total</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>`;
+            let grandTotal = 0;
+            data.forEach(row => {
+                html += `<tr>
+                    <td>${row.date}</td>
+                    <td>${row.retailer}</td>
+                    <td>${row.m_qty}</td>
+                    <td>${row.m_rate}</td>
+                    <td>${row.j_qty}</td>
+                    <td>${row.j_rate}</td>
+                    <td>${row.m_total}</td>
+                    <td>${row.j_total}</td>
+                    <td>${row.total}</td>
+                </tr>`;
+                text += `${row.date}\t${row.retailer}\t${row.m_qty}\t${row.m_rate}\t${row.j_qty}\t${row.j_rate}\t${row.m_total}\t${row.j_total}\t${row.total}\n`;
+                grandTotal += row.total;
+            });
+            html += `</tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="8" style="text-align:right;">Grand Total =</td>
+                        <td>${grandTotal}</td>
+                    </tr>
+                </tfoot>
+            </table></div>`;
+            container.innerHTML = html;
+            text += `Grand Total:\t${grandTotal}`;
+            lastBillText = text;
+            if (shareBtn) shareBtn.style.display = "block";
+        }
+
+        function shareBills() {
+            const tableDiv = document.querySelector('#filter-results .filter-table-container');
+            if (!tableDiv) {
+                alert("No bill to share!");
+                return;
+            }
+            tableDiv.classList.add('mobile-share');
+            setTimeout(() => {
+                html2canvas(tableDiv, {
+                    scale: 2,
+                    backgroundColor: "#fff"
+                }).then(canvas => {
+                    tableDiv.classList.remove('mobile-share');
+                    canvas.toBlob(blob => {
+                        if (navigator.canShare && navigator.canShare({ files: [new File([blob], "bill.png", { type: blob.type })] })) {
+                            const file = new File([blob], "bill.png", { type: blob.type });
+                            navigator.share({
+                                files: [file],
+                                title: "Mallige & Jaji Bill",
+                                text: "Mallige & Jaji Bill"
+                            });
+                        } else {
+                            const url = URL.createObjectURL(blob);
+                            const a = document.createElement('a');
+                            a.href = url;
+                            a.download = "bill.png";
+                            document.body.appendChild(a);
+                            a.click();
+                            document.body.removeChild(a);
+                            URL.revokeObjectURL(url);
+                            alert("Image downloaded! You can now share it via WhatsApp or any other app.");
+                        }
+                    }, 'image/png');
+                });
+            }, 100);
+        }
+
+        function clearFilter() {
+            document.getElementById('filterFrom').value = '';
+            document.getElementById('filterTill').value = '';
+            document.getElementById('filterRetailer').value = '';
+            document.getElementById('filter-results').innerHTML = '';
+        }
+
+        function populateRetailerDropdown() {
+            const select = document.getElementById('filterRetailer');
+            select.innerHTML = '<option value="">All</option>';
+            filterRetailerNames.forEach(name => {
+                select.innerHTML += `<option value="${name}">${name}</option>`;
+            });
+        }
+
+        function updateHalfAccountsTable() {
+            const rateM = parseFloat(document.getElementById('halfRateM').value) || 0;
+            const rateJ = parseFloat(document.getElementById('halfRateJ').value) || 0;
+            const tbody = document.getElementById('half-accounts-tbody');
+            tbody.innerHTML = '';
+            halfCommissionRows.forEach((row, i) => {
+                const mQty = parseFloat(row.m) || 0;
+                const jQty = parseFloat(row.j) || 0;
+                const mTotal = mQty * rateM;
+                const jTotal = jQty * rateJ;
+                const total = mTotal + jTotal;
+                const isPermanent = i < halfCommissionNames.length;
+                tbody.innerHTML += `
+                  <tr>
+                    <td>
+                      ${isPermanent
+                        ? `<span>${row.name}</span>`
+                        : `<input type="text" value="${row.name}" onchange="handleHalfNameInput(${i}, this.value)" style="width:100px">`
+                      }
+                    </td>
+                    <td><input type="number" step="any" value="${row.m}" onchange="handleHalfInput(${i}, 'm', this.value)" style="width:70px"></td>
+                    <td><input type="number" step="any" value="${row.j}" onchange="handleHalfInput(${i}, 'j', this.value)" style="width:70px"></td>
+                    <td>${rateM}</td>
+                    <td>${rateJ}</td>
+                    <td>${mTotal}</td>
+                    <td>${jTotal}</td>
+                    <td>${total}</td>
+                  </tr>
+                `;
+            });
+        }
+
+        function handleHalfInput(i, type, value) {
+            halfCommissionRows[i][type] = value;
+            updateHalfAccountsTable();
+        }
+
+        function handleHalfNameInput(i, value) {
+            halfCommissionRows[i].name = value;
+        }
+
+        function addHalfCommissionRow() {
+            halfCommissionRows.push({ name: "New", m: "", j: "" });
+            updateHalfAccountsTable();
+        }
+
+        function saveHalfAccounts() {
+            const date = document.getElementById('halfAccountsDate').value;
+            const rateM = parseFloat(document.getElementById('halfRateM').value) || 0;
+            const rateJ = parseFloat(document.getElementById('halfRateJ').value) || 0;
+            if (!date) {
+                alert("Please select a date for the account.");
+                return;
+            }
+            const rows = halfCommissionRows.map(row => {
+                const mQty = parseFloat(row.m) || 0;
+                const jQty = parseFloat(row.j) || 0;
+                const mTotal = mQty * rateM;
+                const jTotal = jQty * rateJ;
+                return {
+                    retailer: row.name,
+                    m_qty: mQty,
+                    j_qty: jQty,
+                    m_rate: rateM,
+                    j_rate: rateJ,
+                    m_total: mTotal,
+                    j_total: jTotal,
+                    total: mTotal + jTotal
+                };
+            });
+            fetch("/api/accounts", {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ date, rows })
+            }).then(res => {
+                if (res.ok) {
+                    alert("Half Commission Accounts saved!");
+                } else {
+                    alert("Failed to save accounts.");
+                }
+            });
+        }
+
+        function populateHalfCommissionDropdown() {
+            const select = document.getElementById('filterHalfRetailer');
+            select.innerHTML = '<option value="">All</option>';
+            halfCommissionNames.forEach(name => {
+                select.innerHTML += `<option value="${name}">${name}</option>`;
+            });
+        }
+
+        async function filterHalfCommission() {
+            const from = document.getElementById('filterHalfFrom').value;
+            const till = document.getElementById('filterHalfTill').value;
+            const retailer = document.getElementById('filterHalfRetailer').value;
+            if (!from || !till) {
+                alert("Please select both dates.");
+                return;
+            }
+            let url = `/api/filter-bills?from=${from}&till=${till}`;
+            if (retailer) {
+                url += `&retailer=${encodeURIComponent(retailer)}`;
+            }
+            const res = await fetch(url);
+            const data = await res.json();
+            renderFilterHalfResults(data);
+        }
+
+        function renderFilterHalfResults(data) {
+            const container = document.getElementById('filter-half-results');
+            if (!data.length) {
+                container.innerHTML = "<div style='text-align:center;color:#888;padding:18px;'>No data found for selected dates.</div>";
+                return;
+            }
+            let html = `<div class="filter-table-container"><table class="filter-table">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Name</th>
+                        <th>M</th>
+                        <th>M.Rate</th>
+                        <th>J</th>
+                        <th>J.Rate</th>
+                        <th>M.Total</th>
+                        <th>J.Total</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>`;
+            let grandTotal = 0;
+            data.forEach(row => {
+                html += `<tr>
+                    <td>${row.date}</td>
+                    <td>${row.retailer}</td>
+                    <td>${row.m_qty}</td>
+                    <td>${row.m_rate}</td>
+                    <td>${row.j_qty}</td>
+                    <td>${row.j_rate}</td>
+                    <td>${row.m_total}</td>
+                    <td>${row.j_total}</td>
+                    <td>${row.total}</td>
+                </tr>`;
+                grandTotal += row.total;
+            });
+            html += `</tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="8" style="text-align:right;">Grand Total =</td>
+                        <td>${grandTotal}</td>
+                    </tr>
+                </tfoot>
+            </table></div>`;
+            container.innerHTML = html;
+        }
+
+        function clearFilterHalfCommission() {
+            document.getElementById('filterHalfFrom').value = '';
+            document.getElementById('filterHalfTill').value = '';
+            document.getElementById('filterHalfRetailer').value = '';
+            document.getElementById('filter-half-results').innerHTML = '';
+        }
+
+        function updateRateAccTable() {
+            const rateM = parseFloat(document.getElementById('rateAccM').value) || 0;
+            const rateJ = parseFloat(document.getElementById('rateAccJ').value) || 0;
+            const tbody = document.getElementById('rate-acc-tbody');
+            let grandGivenM = 0, grandTakenM = 0, grandGivenJ = 0, grandTakenJ = 0;
+            tbody.innerHTML = '';
+            rateAccRows.forEach((row, i) => {
+                const givenM = parseFloat(row.givenM) || 0;
+                const takenM = parseFloat(row.takenM) || 0;
+                const givenJ = parseFloat(row.givenJ) || 0;
+                const takenJ = parseFloat(row.takenJ) || 0;
+                const givenMTotal = givenM * rateM;
+                const takenMTotal = takenM * rateM;
+                const givenJTotal = givenJ * rateJ;
+                const takenJTotal = takenJ * rateJ;
+                grandGivenM += givenMTotal;
+                grandTakenM += takenMTotal;
+                grandGivenJ += givenJTotal;
+                grandTakenJ += takenJTotal;
+                tbody.innerHTML += `
+                  <tr>
+                    <td>${row.name}</td>
+                    <td><input type="number" step="any" value="${row.givenM}" onchange="handleRateAccInput(${i}, 'givenM', this.value)" style="width:70px"></td>
+                    <td><input type="number" step="any" value="${row.takenM}" onchange="handleRateAccInput(${i}, 'takenM', this.value)" style="width:70px"></td>
+                    <td><input type="number" step="any" value="${row.givenJ}" onchange="handleRateAccInput(${i}, 'givenJ', this.value)" style="width:70px"></td>
+                    <td><input type="number" step="any" value="${row.takenJ}" onchange="handleRateAccInput(${i}, 'takenJ', this.value)" style="width:70px"></td>
+                    <td>${rateM}</td>
+                    <td>${rateJ}</td>
+                    <td style="color:green;font-weight:600">${givenMTotal}</td>
+                    <td style="color:red;font-weight:600">${takenMTotal}</td>
+                    <td style="color:green;font-weight:600">${givenJTotal}</td>
+                    <td style="color:red;font-weight:600">${takenJTotal}</td>
+                  </tr>
+                `;
+            });
+            document.getElementById('grandGivenMTotal').innerHTML = `<span style="color:green">${grandGivenM}</span>`;
+            document.getElementById('grandTakenMTotal').innerHTML = `<span style="color:red">${grandTakenM}</span>`;
+            document.getElementById('grandGivenJTotal').innerHTML = `<span style="color:green">${grandGivenJ}</span>`;
+            document.getElementById('grandTakenJTotal').innerHTML = `<span style="color:red">${grandTakenJ}</span>`;
+
+            const mNet = grandGivenM - grandTakenM;
+            const jNet = grandGivenJ - grandTakenJ;
+            document.getElementById('grandMNet').innerHTML = `<span style="color:${mNet>=0?'green':'red'};font-weight:700">${mNet}</span>`;
+            document.getElementById('grandJNet').innerHTML = `<span style="color:${jNet>=0?'green':'red'};font-weight:700">${jNet}</span>`;
+
+            const overall = mNet + jNet;
+            document.getElementById('overallBillTotal').innerHTML = `<span style="color:${overall>=0?'green':'red'};font-weight:700">${overall}</span>`;
+        }
+
+        function handleRateAccInput(i, type, value) {
+            rateAccRows[i][type] = value;
+            updateRateAccTable();
+        }
+
+        function saveRateAcc() {
+            const date = document.getElementById('rateAccDate').value;
+            const rateM = parseFloat(document.getElementById('rateAccM').value) || 0;
+            const rateJ = parseFloat(document.getElementById('rateAccJ').value) || 0;
+            if (!date) {
+                alert("Please select a date for the account.");
+                return;
+            }
+            const rows = rateAccRows.map(row => {
+                const givenM = parseFloat(row.givenM) || 0;
+                const takenM = parseFloat(row.takenM) || 0;
+                const givenJ = parseFloat(row.givenJ) || 0;
+                const takenJ = parseFloat(row.takenJ) || 0;
+                const givenMTotal = givenM * rateM;
+                const takenMTotal = takenM * rateM;
+                const givenJTotal = givenJ * rateJ;
+                const takenJTotal = takenJ * rateJ;
+                return {
+                    name: row.name,
+                    givenM,
+                    takenM,
+                    givenJ,
+                    takenJ,
+                    mRate: rateM,
+                    jRate: rateJ,
+                    givenMTotal,
+                    takenMTotal,
+                    givenJTotal,
+                    takenJTotal
+                };
+            });
+            fetch("/api/rate-acc", {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ date, rows })
+            }).then(res => {
+                if (res.ok) {
+                    alert("Rate Acc saved!");
+                } else {
+                    alert("Failed to save Rate Acc.");
+                }
+            });
+        }
+
+        async function filterRateAcc() {
+            const from = document.getElementById('filterRateAccFrom').value;
+            const till = document.getElementById('filterRateAccTill').value;
+            const name = document.getElementById('filterRateAccName').value;
+            if (!from || !till) {
+                alert("Please select both dates.");
+                return;
+            }
+            let url = `/api/rate-acc?from=${from}&till=${till}`;
+            if (name) {
+                url += `&name=${encodeURIComponent(name)}`;
+            }
+            const res = await fetch(url);
+            const data = await res.json();
+            renderRateAccFilterResults(data);
+        }
+
+        function clearFilterRateAcc() {
+            document.getElementById('filterRateAccFrom').value = '';
+            document.getElementById('filterRateAccTill').value = '';
+            document.getElementById('filterRateAccName').value = '';
+            document.getElementById('rate-acc-filter-results').innerHTML = '';
+        }
+
+        function renderRateAccFilterResults(data) {
+            const container = document.getElementById('rate-acc-filter-results');
+            if (!data.length) {
+                container.innerHTML = "<div style='text-align:center;color:#888;padding:18px;'>No data found for selected dates.</div>";
+                return;
+            }
+            let html = `<div class="filter-table-container"><table class="filter-table">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Name</th>
+                        <th>Given M</th>
+                        <th>Taken M</th>
+                        <th>Given J</th>
+                        <th>Taken J</th>
+                        <th>M Rate</th>
+                        <th>J Rate</th>
+                        <th>Given M Total</th>
+                        <th>Taken M Total</th>
+                        <th>Given J Total</th>
+                        <th>Taken J Total</th>
+                    </tr>
+                </thead>
+                <tbody>`;
+            let grandGivenM = 0, grandTakenM = 0, grandGivenJ = 0, grandTakenJ = 0;
+            data.forEach(row => {
+                html += `<tr>
+                    <td>${row.date}</td>
+                    <td>${row.name}</td>
+                    <td>${row.givenM}</td>
+                    <td>${row.takenM}</td>
+                    <td>${row.givenJ}</td>
+                    <td>${row.takenJ}</td>
+                    <td>${row.mRate}</td>
+                    <td>${row.jRate}</td>
+                    <td style="color:green;font-weight:600">${row.givenMTotal}</td>
+                    <td style="color:red;font-weight:600">${row.takenMTotal}</td>
+                    <td style="color:green;font-weight:600">${row.givenJTotal}</td>
+                    <td style="color:red;font-weight:600">${row.takenJTotal}</td>
+                </tr>`;
+                grandGivenM += row.givenMTotal;
+                grandTakenM += row.takenMTotal;
+                grandGivenJ += row.givenJTotal;
+                grandTakenJ += row.takenJTotal;
+            });
+            const mNet = grandGivenM - grandTakenM;
+            const jNet = grandGivenJ - grandTakenJ;
+            const overall = mNet + jNet;
+            html += `</tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="8" style="text-align:right;">Grand Total M:</td>
+                        <td style="color:green">${grandGivenM}</td>
+                        <td style="color:red">${grandTakenM}</td>
+                        <td style="color:green">${grandGivenJ}</td>
+                        <td style="color:red">${grandTakenJ}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="8" style="text-align:right;">Grand Total M (Net):</td>
+                        <td colspan="2" style="color:${mNet>=0?'green':'red'};font-weight:700">${mNet}</td>
+                        <td colspan="2" style="color:${jNet>=0?'green':'red'};font-weight:700">${jNet}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="8" style="text-align:right;">Overall Bill Total:</td>
+                        <td colspan="4" style="color:${overall>=0?'green':'red'};font-weight:700">${overall}</td>
+                    </tr>
+                </tfoot>
+            </table></div>`;
+            container.innerHTML = html;
+        }
+
+        window.onload = function() {
+            loadDistributionFromLocal();
+            if (retailers.length === 0) {
+                retailers = retailerNames.map(name => ({
+                    name,
+                    mFrozen: '',
+                    jFrozen: '',
+                    mNew: '',
+                    jNew: ''
+                }));
+            } else {
+                const added = retailers.filter(r => !retailerNames.includes(r.name));
+                retailers = retailerNames.map(name => {
+                    const existing = retailers.find(r => r.name === name);
+                    return existing ? existing : { name, mFrozen: '', jFrozen: '', mNew: '', jNew: '' };
+                });
+                retailers = retailers.concat(added);
+            }
+            renderRetailers();
+            populateRetailerDropdown();
+            let section = "distribution";
+            if (window.location.hash) {
+                section = window.location.hash.substring(1);
+            }
+            showSection(section);
+        };
+    </script>
 </body>
 </html>
