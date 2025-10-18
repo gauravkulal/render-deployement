@@ -1323,14 +1323,14 @@
                             <span class="input-label-inline">M:</span>
                             <div class="input-wrapper">
                                 <input type="text" id="m_${i}" class="input-field-inline" value="${mValue}" oninput="handleInput(${i}, 'm')">
-                                <span class="sum-badge">= ${mSum}</span>
+                                <span class="sum-badge" id="sum_m_${i}">= ${mSum}</span>
                             </div>
                         </div>
                         <div class="input-row">
                             <span class="input-label-inline">J:</span>
                             <div class="input-wrapper">
                                 <input type="text" id="j_${i}" class="input-field-inline" value="${jValue}" oninput="handleInput(${i}, 'j')">
-                                <span class="sum-badge">= ${jSum}</span>
+                                <span class="sum-badge" id="sum_j_${i}">= ${jSum}</span>
                             </div>
                         </div>
                     </div>
@@ -1352,6 +1352,18 @@
                 const jInput = document.getElementById(`j_${i}`);
                 if (mInput) mInput.value = r.mFrozen + (r.mNew ? '+' + r.mNew : '');
                 if (jInput) jInput.value = r.jFrozen + (r.jNew ? '+' + r.jNew : '');
+                
+                // Update sum badges
+                const mSumBadge = document.getElementById(`sum_m_${i}`);
+                const jSumBadge = document.getElementById(`sum_j_${i}`);
+                if (mSumBadge) {
+                    const mValue = r.mFrozen + (r.mNew ? '+' + r.mNew : '');
+                    mSumBadge.innerText = '= ' + sum(mValue);
+                }
+                if (jSumBadge) {
+                    const jValue = r.jFrozen + (r.jNew ? '+' + r.jNew : '');
+                    jSumBadge.innerText = '= ' + sum(jValue);
+                }
             });
 
             document.getElementById('firstM').value = totalM1;
@@ -1395,6 +1407,15 @@
                 if (newPart.startsWith('+')) newPart = newPart.slice(1);
                 retailers[id][type + 'New'] = newPart;
             }
+            
+            // Update the sum badge in real-time
+            const sumBadge = document.getElementById(`sum_${type}_${id}`);
+            if (sumBadge) {
+                // Use the actual input value for calculation
+                const calculatedSum = sum(input.value);
+                sumBadge.innerText = '= ' + calculatedSum;
+            }
+            
             updateTotals();
             saveDistributionToLocal();
         }
